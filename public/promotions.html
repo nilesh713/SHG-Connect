@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Promotions – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/promotions.js" defer></script>
+</head>
+<body data-layout="dashboard" data-require="seller" data-title="nav.promotions">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="alert alert-info"><i data-lucide="megaphone" aria-hidden="true"></i><p data-i18n="promo.intro">Promotion is free in this prototype. Promoted products appear in "Promoted Products" on the marketplace, featured products appear on the home page, and discounts show a price tag.</p></div>
+<div class="dash-grid sidebar-right">
+  <section aria-labelledby="pl-h"><h2 id="pl-h" style="font-size:1.15rem" data-i18n="promo.yours">Your promotions</h2><div id="promo-list" class="stack"></div></section>
+  <section class="card" aria-labelledby="pf-h">
+    <h2 id="pf-h" style="font-size:1.15rem"><i data-lucide="rocket" aria-hidden="true"></i> <span data-i18n="promo.new">Promote a product</span></h2>
+    <form id="promo-form">
+      <div class="form-group"><label for="pr-product" class="required" data-i18n="promo.product">Product</label><select class="input" id="pr-product" name="productId"></select></div>
+      <fieldset class="form-group" style="border:0;padding:0"><legend class="label required" data-i18n="promo.type">Promotion type</legend>
+        <div class="choice-grid" style="grid-template-columns:1fr">
+          <div class="choice"><input type="radio" id="pt-promoted" name="type" value="promoted" checked><label for="pt-promoted"><i data-lucide="megaphone" aria-hidden="true"></i><span data-i18n="promo.type.promoted">Promote</span><small data-i18n="promo.promotedHint">Show in "Promoted Products" on the marketplace</small></label></div>
+          <div class="choice"><input type="radio" id="pt-featured" name="type" value="featured"><label for="pt-featured"><i data-lucide="award" aria-hidden="true"></i><span data-i18n="promo.type.featured">Feature</span><small data-i18n="promo.featuredHint">Show in "Featured Products" on the home page</small></label></div>
+          <div class="choice"><input type="radio" id="pt-discount" name="type" value="discount"><label for="pt-discount"><i data-lucide="percent" aria-hidden="true"></i><span data-i18n="promo.type.discount">Discount</span><small data-i18n="promo.discountHint">Offer a limited-time discount</small></label></div>
+        </div></fieldset>
+      <div class="form-group" id="discount-group"><label for="pr-discount" class="required" data-i18n="promo.discountPercent">Discount %</label>
+        <input class="input" id="pr-discount" name="discountPercent" type="number" min="5" max="90" value="10" inputmode="numeric"></div>
+      <div class="form-group"><label for="pr-days" class="required" data-i18n="promo.duration">Duration</label>
+        <select class="input" id="pr-days" name="durationDays">
+          <option value="3" data-i18n="promo.d3">3 days</option><option value="7" selected data-i18n="promo.d7">7 days</option>
+          <option value="15" data-i18n="promo.d15">15 days</option><option value="30" data-i18n="promo.d30">30 days</option></select></div>
+      <button class="btn btn-earth btn-lg btn-block" type="submit"><i data-lucide="rocket" aria-hidden="true"></i><span data-i18n="promo.start">Start promotion</span></button>
+    </form>
+  </section>
+</div>
+</main>
+</body>
+</html>

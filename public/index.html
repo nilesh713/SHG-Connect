@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHG Connect – Artisan &amp; Self Help Group Marketplace</title>
+  <meta name="description" content="Discover local products and support local artisans. SHG Connect connects customers directly with Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/home.js" defer></script>
+</head>
+<body data-layout="public">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow"><i data-lucide="sprout" aria-hidden="true"></i><span data-i18n="home.eyebrow">Local products · Trusted sellers</span></span>
+        <h1 data-i18n-html="home.title">Discover Local Products. <span>Support Local Artisans.</span></h1>
+        <p class="hero-sub" data-i18n="home.subtitle">Connect directly with SHGs, artisans and small-scale producers.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="/products.html"><i data-lucide="search" aria-hidden="true"></i><span data-i18n="home.ctaExplore">Explore Products</span></a>
+          <a class="btn btn-secondary btn-lg" href="/register.html?role=seller"><i data-lucide="store" aria-hidden="true"></i><span data-i18n="home.ctaSell">Sell Your Products</span></a>
+        </div>
+        <ul class="hero-trust">
+          <li><i data-lucide="badge-check" aria-hidden="true"></i><span data-i18n="home.trust1">Direct from makers</span></li>
+          <li><i data-lucide="smartphone" aria-hidden="true"></i><span data-i18n="home.trust2">UPI &amp; Cash on Delivery</span></li>
+          <li><i data-lucide="languages" aria-hidden="true"></i><span data-i18n="home.trust3">English &amp; हिंदी</span></li>
+        </ul>
+      </div>
+      <div class="hero-collage" aria-hidden="true">
+        <div class="hero-tile tall"><img src="/assets/demo/saree.svg" alt="" width="300" height="600"><span data-i18n="cat.handloom">Handloom</span></div>
+        <div class="hero-tile"><img src="/assets/demo/basket.svg" alt="" width="200" height="200"><span data-i18n="cat.handicrafts">Handicrafts</span></div>
+        <div class="hero-tile"><img src="/assets/demo/pottery.svg" alt="" width="200" height="200"><span data-i18n="cat.pottery">Pottery</span></div>
+        <div class="hero-tile"><img src="/assets/demo/pickle.svg" alt="" width="200" height="200"><span data-i18n="cat.food">Food Products</span></div>
+        <div class="hero-tile"><img src="/assets/demo/necklace.svg" alt="" width="200" height="200"><span data-i18n="cat.jewelry">Jewelry</span></div>
+        <div class="hero-tile"><img src="/assets/demo/dupatta.svg" alt="" width="200" height="200"><span data-i18n="cat.embroidery">Embroidery</span></div>
+        <div class="hero-tile"><img src="/assets/demo/elephant.svg" alt="" width="200" height="200"><span data-i18n="cat.wooden">Wooden Products</span></div>
+        <div class="hero-tile"><img src="/assets/demo/turmeric.svg" alt="" width="200" height="200"><span data-i18n="cat.agri">Agriculture</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why SHG Connect: each card answers a survey finding -->
+  <section class="section" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="home.whyEyebrow">Built from our field survey</span>
+          <h2 id="why-title" data-i18n="home.whyTitle">Why SHG Connect?</h2>
+        </div>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-icon"><i data-lucide="users" aria-hidden="true"></i></div>
+          <h3 data-i18n="home.why1">Reach More Customers</h3>
+          <p data-i18n="home.why1Text">Your products are visible to buyers beyond your village or local market.</p>
+          <span class="survey-note" data-i18n="home.why1Note">Survey: finding new customers is a major problem</span>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><i data-lucide="megaphone" aria-hidden="true"></i></div>
+          <h3 data-i18n="home.why2">Promote Your Products</h3>
+          <p data-i18n="home.why2Text">Free promotion, featured listings and discounts to make your products stand out.</p>
+          <span class="survey-note" data-i18n="home.why2Note">Survey: lack of promotion &amp; low visibility</span>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><i data-lucide="clipboard-check" aria-hidden="true"></i></div>
+          <h3 data-i18n="home.why3">Manage Orders Easily</h3>
+          <p data-i18n="home.why3Text">One big button for the next step – confirm, pack, ship, deliver. Get notified for every new order.</p>
+          <span class="survey-note" data-i18n="home.why3Note">Survey: lack of time &amp; online knowledge</span>
+        </article>
+        <article class="feature">
+          <div class="feature-icon"><i data-lucide="indian-rupee" aria-hidden="true"></i></div>
+          <h3 data-i18n="home.why4">Receive Digital Payments</h3>
+          <p data-i18n="home.why4Text">Accept UPI directly to your own UPI ID, or Cash on Delivery. Track every payment.</p>
+          <span class="survey-note" data-i18n="home.why4Note">Survey: payment problems reported</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section section-alt" aria-labelledby="cat-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="cat-title" data-i18n="home.categories">Shop by category</h2>
+        <a href="/products.html" class="btn btn-ghost"><span data-i18n="common.viewAll">View all</span><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="category-grid" id="category-grid"></div>
+    </div>
+  </section>
+
+  <!-- Featured products (from MongoDB) -->
+  <section class="section" aria-labelledby="featured-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow"><i data-lucide="award" aria-hidden="true"></i><span data-i18n="home.featuredEyebrow">Handpicked</span></span>
+          <h2 id="featured-title" data-i18n="home.featured">Featured Products</h2>
+        </div>
+        <a href="/products.html" class="btn btn-secondary"><span data-i18n="home.ctaExplore">Explore Products</span><i data-lucide="arrow-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="product-grid" id="featured-grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- Featured artisans -->
+  <section class="section section-alt" aria-labelledby="artisans-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="home.artisansEyebrow">Meet the makers</span>
+          <h2 id="artisans-title" data-i18n="market.featuredArtisans">Featured Artisans</h2>
+        </div>
+      </div>
+      <div class="seller-grid" id="artisan-grid"></div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section" id="how-it-works" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head"><h2 id="how-title" data-i18n="nav.howItWorks">How It Works</h2></div>
+      <div class="steps-wrap">
+        <div>
+          <h3><i data-lucide="store" aria-hidden="true"></i> <span data-i18n="home.forSellers">For sellers</span></h3>
+          <ol class="steps earth">
+            <li><span data-i18n="home.s1">Create profile</span><i data-lucide="user-round-plus" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.s2">Add products</span><i data-lucide="camera" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.s3">Promote products</span><i data-lucide="megaphone" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.s4">Receive orders</span><i data-lucide="bell-ring" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.s5">Track delivery</span><i data-lucide="truck" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.s6">View sales</span><i data-lucide="chart-column" aria-hidden="true"></i></li>
+          </ol>
+          <a class="btn btn-earth" href="/register.html?role=seller" style="margin-top:14px"><span data-i18n="home.startSelling">Start selling – it's free</span></a>
+        </div>
+        <div>
+          <h3><i data-lucide="shopping-bag" aria-hidden="true"></i> <span data-i18n="home.forCustomers">For customers</span></h3>
+          <ol class="steps">
+            <li><span data-i18n="home.c1">Explore</span><i data-lucide="compass" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.c2">Search</span><i data-lucide="search" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.c3">View product</span><i data-lucide="eye" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.c4">Place order</span><i data-lucide="shopping-cart" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.c5">Pay (UPI or Cash on Delivery)</span><i data-lucide="indian-rupee" aria-hidden="true"></i></li>
+            <li><span data-i18n="home.c6">Track order</span><i data-lucide="map-pinned" aria-hidden="true"></i></li>
+          </ol>
+          <a class="btn btn-primary" href="/products.html" style="margin-top:14px"><span data-i18n="home.startShopping">Start shopping</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About the project -->
+  <section class="section section-alt" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about-box">
+        <span class="eyebrow" data-i18n="home.aboutEyebrow">College field project · Technology prototype</span>
+        <h2 id="about-title" data-i18n="home.aboutTitle">About the Project</h2>
+        <p data-i18n="home.about1">SHG Connect was designed to address challenges identified through field survey research involving Self Help Groups (SHGs), artisans and small-scale producers.</p>
+        <p data-i18n="home.about2">Respondents told us these were their biggest difficulties:</p>
+        <ul class="finding-list">
+          <li><i data-lucide="search-x" aria-hidden="true"></i><span data-i18n="home.f1">Finding new customers and low product visibility</span></li>
+          <li><i data-lucide="megaphone-off" aria-hidden="true"></i><span data-i18n="home.f2">Lack of product promotion</span></li>
+          <li><i data-lucide="wifi-off" aria-hidden="true"></i><span data-i18n="home.f3">Lack of online knowledge and lack of time</span></li>
+          <li><i data-lucide="truck" aria-hidden="true"></i><span data-i18n="home.f4">Delivery and transportation problems</span></li>
+          <li><i data-lucide="wallet" aria-hidden="true"></i><span data-i18n="home.f5">Payment problems</span></li>
+        </ul>
+        <p style="margin-top:16px" data-i18n="home.about3">This prototype focuses on product visibility, customer reach, simple digital selling, order management, delivery visibility, sales tracking, reviews and digital payment support. It does not claim to solve every problem artisans face – it is a starting point that shows how simple technology can help.</p>
+        <p class="small muted" data-i18n="home.about4">Note: UPI payments use a demo flow (UPI link / QR to the seller's own UPI ID). Delivery tracking shows status updates entered by the seller – there is no live GPS tracking.</p>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

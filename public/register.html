@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body data-layout="public">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="auth-wrap"><div class="auth-card" style="max-width:640px">
+  <div class="card">
+    <div class="auth-head"><span class="logo-mark"><i data-lucide="sprout" aria-hidden="true"></i></span><h1 style="font-size:1.6rem" data-i18n="auth.registerTitle">Create your account</h1>
+      <p class="muted" data-i18n="auth.registerSub">It takes less than 2 minutes. Selling is free.</p></div>
+    <form id="register-form">
+      <fieldset class="form-group" style="border:0;padding:0">
+        <legend class="label required" data-i18n="auth.iAm">I want to…</legend>
+        <div class="choice-grid">
+          <div class="choice"><input type="radio" id="r-customer" name="role" value="customer" checked><label for="r-customer"><i data-lucide="shopping-bag" aria-hidden="true"></i><span data-i18n="role.customer">Customer</span><small data-i18n="auth.roleCustomer">Buy local products</small></label></div>
+          <div class="choice"><input type="radio" id="r-artisan" name="role" value="artisan"><label for="r-artisan"><i data-lucide="palette" aria-hidden="true"></i><span data-i18n="role.artisan">Artisan / Seller</span><small data-i18n="auth.roleArtisan">I make and sell products</small></label></div>
+          <div class="choice"><input type="radio" id="r-member" name="role" value="shg_member"><label for="r-member"><i data-lucide="user-round" aria-hidden="true"></i><span data-i18n="role.shg_member">SHG Member</span><small data-i18n="auth.roleMember">Member of a Self Help Group</small></label></div>
+          <div class="choice"><input type="radio" id="r-leader" name="role" value="shg_leader"><label for="r-leader"><i data-lucide="users" aria-hidden="true"></i><span data-i18n="role.shg_leader">SHG Leader</span><small data-i18n="auth.roleLeader">I sell for my group</small></label></div>
+          <div class="choice"><input type="radio" id="r-producer" name="role" value="producer"><label for="r-producer"><i data-lucide="wheat" aria-hidden="true"></i><span data-i18n="role.producer">Small-scale Producer</span><small data-i18n="auth.roleProducer">Farm / food / small unit</small></label></div>
+        </div>
+      </fieldset>
+      <div class="form-row">
+        <div class="form-group"><label for="name" class="required" data-i18n="auth.fullName">Full name</label><input class="input" id="name" name="name" autocomplete="name" maxlength="60"></div>
+        <div class="form-group"><label for="phone" class="required" data-i18n="auth.mobile">Mobile number</label>
+          <input class="input" id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="9876543210">
+          <span class="hint" data-i18n="auth.mobileHint">10 digits, without +91</span></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="email" class="required" data-i18n="auth.email">Email</label><input class="input" id="email" name="email" type="email" autocomplete="email"></div>
+        <div class="form-group"><label for="location" class="required" data-i18n="auth.location">Location (village / town, state)</label><input class="input" id="location" name="location" autocomplete="address-level2" data-i18n-placeholder="auth.locationPh" placeholder="e.g. Satara, Maharashtra"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="password" class="required" data-i18n="auth.password">Password</label>
+          <div class="password-wrap"><input class="input" id="password" name="password" type="password" autocomplete="new-password">
+            <button type="button" class="icon-btn toggle-pass" data-target="password" aria-label="Show password" data-i18n-aria-label="auth.showPassword"><i data-lucide="eye" aria-hidden="true"></i></button></div>
+          <span class="hint" data-i18n="auth.passwordHint">At least 6 characters with one number</span></div>
+        <div class="form-group"><label for="confirmPassword" class="required" data-i18n="auth.confirmPassword">Confirm password</label>
+          <input class="input" id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password"></div>
+      </div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit"><i data-lucide="user-plus" aria-hidden="true"></i><span data-i18n="auth.createAccount">Create account</span></button>
+    </form>
+    <p class="text-center" style="margin-top:16px"><span data-i18n="auth.haveAccount">Already have an account?</span> <a href="/login.html" data-i18n="nav.login">Login</a></p>
+  </div>
+</div></div>
+</main>
+</body>
+</html>

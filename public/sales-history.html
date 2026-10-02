@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sales History – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/charts.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/sales-history.js" defer></script>
+</head>
+<body data-layout="dashboard" data-require="seller" data-title="nav.sales">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="range-bar">
+  <div class="row" id="range-buttons" role="group" aria-label="Date range" data-i18n-aria-label="sales.range">
+    <button class="chip" type="button" data-range="today" aria-pressed="false"><span data-i18n="sales.today">Today</span></button>
+    <button class="chip" type="button" data-range="week" aria-pressed="false"><span data-i18n="sales.week">This week</span></button>
+    <button class="chip" type="button" data-range="month" aria-pressed="true"><span data-i18n="sales.month">This month</span></button>
+    <button class="chip" type="button" data-range="all" aria-pressed="false"><span data-i18n="sales.year">Last 12 months</span></button>
+    <button class="chip" type="button" data-range="custom" aria-pressed="false"><i data-lucide="calendar" aria-hidden="true"></i><span data-i18n="sales.custom">Custom range</span></button>
+  </div>
+  <form class="custom-range" id="custom-form" hidden>
+    <div class="form-group"><label for="from" class="small" data-i18n="sales.from">From</label><input class="input" id="from" type="date"></div>
+    <div class="form-group"><label for="to" class="small" data-i18n="sales.to">To</label><input class="input" id="to" type="date"></div>
+    <button class="btn btn-primary" type="submit"><span data-i18n="sales.applyRange">Show</span></button>
+  </form>
+</div>
+<div id="sales-root" class="stack"></div>
+</main>
+</body>
+</html>

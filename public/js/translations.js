@@ -1,0 +1,683 @@
+/* Local-language support (English / Hindi).
+   - t('key', {vars}) returns the text in the selected language (falls back to English)
+   - Static HTML uses data-i18n, data-i18n-html, data-i18n-placeholder, data-i18n-aria-label, data-i18n-title */
+(function () {
+  const en = {
+    // Brand & navigation
+    'brand.tagline': 'Local makers marketplace',
+    'nav.home': 'Home', 'nav.explore': 'Explore Products', 'nav.howItWorks': 'How It Works', 'nav.about': 'About',
+    'nav.login': 'Login', 'nav.register': 'Register', 'nav.cart': 'Cart', 'nav.account': 'My account', 'nav.main': 'Main menu',
+    'nav.myOrders': 'My Orders', 'nav.profile': 'Profile', 'nav.settings': 'Settings', 'nav.logout': 'Logout',
+    'nav.sellerDashboard': 'Seller Dashboard', 'nav.adminDashboard': 'Admin Dashboard', 'nav.dashboardMenu': 'Dashboard menu',
+    'nav.dashboard': 'Dashboard', 'nav.myProducts': 'My Products', 'nav.addProduct': 'Add Product', 'nav.orders': 'Orders',
+    'nav.delivery': 'Delivery', 'nav.sales': 'Sales History', 'nav.reviews': 'Reviews', 'nav.promotions': 'Promotions',
+    'nav.payments': 'Payments', 'nav.marketplace': 'Marketplace',
+    'lang.choose': 'Choose language',
+
+    // Common
+    'common.close': 'Close', 'common.cancel': 'Cancel', 'common.yes': 'Yes', 'common.confirm': 'Confirm', 'common.back': 'Back',
+    'common.next': 'Next', 'common.prev': 'Previous', 'common.save': 'Save', 'common.saveChanges': 'Save changes', 'common.edit': 'Edit',
+    'common.delete': 'Delete', 'common.remove': 'Remove', 'common.details': 'Details', 'common.viewAll': 'View all',
+    'common.loading': 'Loading…', 'common.pleaseWait': 'Please wait…', 'common.retry': 'Try again', 'common.optional': 'optional',
+    'common.areYouSure': 'Are you sure?', 'common.skip': 'Skip to main content', 'common.openMenu': 'Open menu',
+    'common.closeMenu': 'Close menu', 'common.pagination': 'Pages', 'common.breadcrumb': 'Breadcrumb',
+
+    'time.justNow': 'just now', 'time.minutes': '{n} min ago', 'time.hour': '1 hour ago', 'time.hours': '{n} hours ago', 'time.day': 'yesterday', 'time.days': '{n} days ago',
+
+    // Errors & validation
+    'err.network': 'Cannot reach the server. Please check your internet connection.',
+    'err.generic': 'Something went wrong. Please try again.', 'err.loadTitle': 'Could not load this section',
+    'err.404Title': 'Page not found', 'err.404Text': 'The page you are looking for does not exist or was moved.',
+    'val.fixErrors': 'Please correct the highlighted fields.',
+    'val.identifier': 'Please enter your email or mobile number', 'val.passwordRequired': 'Please enter your password',
+    'val.name': 'Please enter your full name', 'val.email': 'Please enter a valid email address',
+    'val.phone': 'Please enter a valid 10-digit mobile number', 'val.passwordLength': 'Password must be at least 6 characters',
+    'val.passwordNumber': 'Password must contain at least one number', 'val.passwordMatch': 'Passwords do not match',
+    'val.location': 'Please enter your village / town / city', 'val.role': 'Please choose what you want to do',
+    'val.receiver': 'Please enter the receiver name', 'val.address': 'Please enter the full address',
+    'val.city': 'Please enter the city / village', 'val.state': 'Please enter the state',
+    'val.pincode': 'Please enter a valid 6-digit PIN code', 'val.payment': 'Please choose a payment method',
+    'val.upi': 'Please enter a valid UPI ID (example: name@upi)',
+
+    // Roles
+    'role.customer': 'Customer', 'role.artisan': 'Artisan / Seller', 'role.shg_member': 'SHG Member', 'role.shg_leader': 'SHG Leader',
+    'role.producer': 'Small-scale Producer', 'role.admin': 'Admin',
+
+    // Statuses (order / payment / product / review / account)
+    'status.new': 'New', 'order.placedStep': 'Order placed', 'status.confirmed': 'Confirmed', 'status.processing': 'Processing', 'status.ready_to_ship': 'Ready to ship',
+    'status.shipped': 'Shipped', 'status.out_for_delivery': 'Out for delivery', 'status.delivered': 'Delivered', 'status.cancelled': 'Cancelled',
+    'status.pending': 'Pending', 'status.paid': 'Paid', 'status.failed': 'Failed', 'status.refunded': 'Refunded',
+    'status.approved': 'Live', 'status.rejected': 'Rejected', 'status.draft': 'Draft', 'status.flagged': 'Reported', 'status.hidden': 'Hidden',
+    'status.active': 'Active', 'status.suspended': 'Suspended', 'status.ended': 'Ended',
+
+    'payment.cod': 'Cash on Delivery', 'payment.upi': 'UPI',
+    'delivery.pickup': 'Pickup only', 'delivery.local': 'Local delivery', 'delivery.state': 'Within state', 'delivery.nationwide': 'All India', 'delivery.free': 'Free',
+
+    'cat.handicrafts': 'Handicrafts', 'cat.handloom': 'Handloom', 'cat.embroidery': 'Embroidery', 'cat.food': 'Food Products',
+    'cat.jewelry': 'Jewelry', 'cat.pottery': 'Pottery', 'cat.wooden': 'Wooden Products', 'cat.agri': 'Agriculture',
+
+    // Home
+    'home.eyebrow': 'Local products · Trusted sellers',
+    'home.title': 'Discover Local Products. <span>Support Local Artisans.</span>',
+    'home.subtitle': 'Connect directly with SHGs, artisans and small-scale producers.',
+    'home.ctaExplore': 'Explore Products', 'home.ctaSell': 'Sell Your Products',
+    'home.trust1': 'Direct from makers', 'home.trust2': 'UPI & Cash on Delivery', 'home.trust3': 'English & हिंदी',
+    'home.whyEyebrow': 'Built from our field survey', 'home.whyTitle': 'Why SHG Connect?',
+    'home.why1': 'Reach More Customers', 'home.why1Text': 'Your products are visible to buyers beyond your village or local market.',
+    'home.why1Note': 'Survey: finding new customers is a major problem',
+    'home.why2': 'Promote Your Products', 'home.why2Text': 'Free promotion, featured listings and discounts to make your products stand out.',
+    'home.why2Note': 'Survey: lack of promotion & low visibility',
+    'home.why3': 'Manage Orders Easily', 'home.why3Text': 'One big button for the next step – confirm, pack, ship, deliver. Get notified for every new order.',
+    'home.why3Note': 'Survey: lack of time & online knowledge',
+    'home.why4': 'Receive Digital Payments', 'home.why4Text': 'Accept UPI directly to your own UPI ID, or Cash on Delivery. Track every payment.',
+    'home.why4Note': 'Survey: payment problems reported',
+    'home.categories': 'Shop by category', 'home.featuredEyebrow': 'Handpicked', 'home.featured': 'Featured Products',
+    'home.artisansEyebrow': 'Meet the makers', 'home.noArtisans': 'Featured artisans will appear here.',
+    'home.noProductsText': 'Be the first seller to list a product.',
+    'home.forSellers': 'For sellers', 'home.forCustomers': 'For customers',
+    'home.s1': 'Create profile', 'home.s2': 'Add products', 'home.s3': 'Promote products', 'home.s4': 'Receive orders', 'home.s5': 'Track delivery', 'home.s6': 'View sales',
+    'home.c1': 'Explore', 'home.c2': 'Search', 'home.c3': 'View product', 'home.c4': 'Place order', 'home.c5': 'Pay (UPI or Cash on Delivery)', 'home.c6': 'Track order',
+    'home.startSelling': "Start selling – it's free", 'home.startShopping': 'Start shopping',
+    'home.aboutEyebrow': 'College field project · Technology prototype', 'home.aboutTitle': 'About the Project',
+    'home.about1': 'SHG Connect was designed to address challenges identified through field survey research involving Self Help Groups (SHGs), artisans and small-scale producers.',
+    'home.about2': 'Respondents told us these were their biggest difficulties:',
+    'home.f1': 'Finding new customers and low product visibility', 'home.f2': 'Lack of product promotion',
+    'home.f3': 'Lack of online knowledge and lack of time', 'home.f4': 'Delivery and transportation problems', 'home.f5': 'Payment problems',
+    'home.about3': 'This prototype focuses on product visibility, customer reach, simple digital selling, order management, delivery visibility, sales tracking, reviews and digital payment support. It does not claim to solve every problem artisans face – it is a starting point that shows how simple technology can help.',
+    'home.about4': "Note: UPI payments use a demo flow (UPI link / QR to the seller's own UPI ID). Delivery tracking shows status updates entered by the seller – there is no live GPS tracking.",
+
+    // Footer
+    'footer.about': 'A simple marketplace that helps Self Help Groups, artisans and small producers reach more customers.',
+    'footer.marketplace': 'Marketplace', 'footer.project': 'Project', 'footer.legal': 'Legal', 'footer.contact': 'Contact',
+    'footer.privacy': 'Privacy', 'footer.terms': 'Terms', 'footer.share': 'Share SHG Connect', 'footer.shareWhatsapp': 'Share on WhatsApp',
+    'footer.shareFacebook': 'Share on Facebook', 'footer.email': 'Email us', 'footer.shareText': 'Buy handmade products directly from SHGs and artisans on SHG Connect:',
+    'footer.prototype': 'College field-project prototype', 'footer.madeFor': 'Made for SHGs, artisans & small producers',
+    'contact.text': 'SHG Connect is a college field-project prototype. For questions about the project or to report a problem, contact the project team.',
+    'contact.whatsapp': 'Have a question about an order? Use the "Chat on WhatsApp" button on the product or seller page to talk to the seller directly.',
+    'contact.safety': 'We will never ask for your password, OTP, card number or UPI PIN.',
+
+    // Auth
+    'auth.loginTitle': 'Welcome back', 'auth.loginSub': 'Login with your email or mobile number.',
+    'auth.identifier': 'Email or mobile number', 'auth.password': 'Password', 'auth.showPassword': 'Show password', 'auth.hidePassword': 'Hide password',
+    'auth.noAccount': 'New to SHG Connect?', 'auth.createAccount': 'Create account', 'auth.haveAccount': 'Already have an account?',
+    'auth.demoTitle': 'Demo accounts (college project)', 'auth.demoText': 'Tap a role to fill in the login form. See README for details.',
+    'auth.registerTitle': 'Create your account', 'auth.registerSub': 'It takes less than 2 minutes. Selling is free.',
+    'auth.iAm': 'I want to…', 'auth.roleCustomer': 'Buy local products', 'auth.roleArtisan': 'I make and sell products',
+    'auth.roleMember': 'Member of a Self Help Group', 'auth.roleLeader': 'I sell for my group', 'auth.roleProducer': 'Farm / food / small unit',
+    'auth.fullName': 'Full name', 'auth.mobile': 'Mobile number', 'auth.mobileHint': '10 digits, without +91', 'auth.email': 'Email',
+    'auth.location': 'Location (village / town, state)', 'auth.locationPh': 'e.g. Satara, Maharashtra',
+    'auth.passwordHint': 'At least 6 characters with one number', 'auth.confirmPassword': 'Confirm password',
+    'auth.welcome': 'Welcome, {name}!', 'auth.registered': 'Account created! Welcome to SHG Connect.', 'auth.loggedOut': 'You have been logged out.',
+
+    // Marketplace
+    'market.title': 'Explore Products', 'market.subtitle': 'Handmade and homemade products directly from SHGs, artisans and small producers.',
+    'market.searchLabel': 'Search products, sellers or categories', 'market.searchPh': 'Search products, sellers or categories…', 'market.search': 'Search',
+    'market.categories': 'Categories', 'market.promoted': 'Promoted Products', 'market.featuredArtisans': 'Featured Artisans', 'market.featuredArtisan': 'Featured Artisan',
+    'market.filters': 'Filters', 'market.showFilters': 'Show filters', 'market.category': 'Category', 'market.allCategories': 'All categories',
+    'market.searchSeller': 'Search by seller', 'market.sellerPh': 'Seller or SHG name', 'market.seller': 'Seller', 'market.price': 'Price (₹)',
+    'market.min': 'Min', 'market.max': 'Max', 'market.location': 'Seller location', 'market.allLocations': 'All locations',
+    'market.inStockOnly': 'In stock only', 'market.apply': 'Apply filters', 'market.clear': 'Clear all', 'market.all': 'All',
+    'market.resultsTitle': 'Products', 'market.results': '{n} products found', 'market.sortBy': 'Sort by',
+    'market.sort.newest': 'Newest', 'market.sort.priceAsc': 'Price: low to high', 'market.sort.priceDesc': 'Price: high to low',
+    'market.sort.popular': 'Popular', 'market.sort.rating': 'Top rated', 'market.loading': 'Finding products…',
+    'market.noResults': 'No products found', 'market.noResultsText': 'Try a different word, remove a filter or choose another category.',
+    'market.noProducts': 'No products yet', 'market.noPromoted': 'No promoted products right now.', 'market.removeFilter': 'Remove filter',
+    'market.priceError': 'Minimum price cannot be more than maximum price.',
+
+    // Product
+    'product.promoted': 'Promoted', 'product.featured': 'Featured', 'product.off': 'OFF', 'product.view': 'View Product',
+    'product.addToCart': 'Add to Cart', 'product.soldOut': 'Sold out', 'product.buyNow': 'Buy Now', 'product.inStock': 'In stock',
+    'product.onlyLeft': 'Only {n} left', 'product.outOfStock': 'Out of stock', 'product.noRatings': 'No ratings yet',
+    'product.ratingAria': 'Rated {rating} out of 5', 'product.notFound': 'Product not found',
+    'product.notFoundText': 'This product may have been removed or is no longer available.', 'product.photos': 'Product photos',
+    'product.photoN': 'Show photo {n}', 'product.availability': 'Availability', 'product.available': 'available', 'product.delivery': 'Delivery',
+    'product.location': 'Location', 'product.quantity': 'Quantity', 'product.decrease': 'Decrease quantity', 'product.increase': 'Increase quantity',
+    'product.contactWhatsapp': 'Chat on WhatsApp', 'product.contactSeller': 'Contact Seller', 'product.shareWhatsapp': 'Share on WhatsApp',
+    'product.waContactText': 'Hello! I saw your product "{name}" on SHG Connect and would like to know more. {url}',
+    'product.waShareText': 'Look at this handmade product on SHG Connect: {name} – {price} {url}',
+    'product.description': 'Description', 'product.noDescription': 'No description added yet.', 'product.aboutSeller': 'About the seller',
+    'product.viewSellerProducts': 'View all products from this seller', 'product.reviews': 'Customer Reviews',
+    'product.yourProduct': 'This is your product.', 'product.notPublic': 'This product is not visible to customers (status: {status}).',
+
+    // Seller (public)
+    'seller.products': 'products', 'seller.memberSince': 'Member since {date}', 'seller.about': 'About', 'seller.categories': 'Categories',
+    'seller.delivery': 'Delivery', 'seller.productsBy': 'Products by {name}', 'seller.noProducts': 'No products listed yet.',
+    'seller.notFound': 'Seller not found', 'seller.waText': 'Hello {name}! I found you on SHG Connect.',
+
+    // Reviews
+    'review.yourRating': 'Your rating', 'review.stars': 'stars', 'review.none': 'No reviews yet. Customers can review after delivery.',
+    'review.basedOn': 'Based on {n} reviews', 'review.distribution': 'Rating distribution', 'review.verified': 'Verified buyer',
+    'review.write': 'Write a review', 'review.comment': 'Your review (optional)', 'review.commentPh': 'How was the quality, packing and delivery?',
+    'review.submit': 'Post review', 'review.chooseRating': 'Please choose a star rating', 'review.thanks': 'Thank you for your review!',
+    'review.thanksAlready': 'You have already reviewed this product. Thank you!', 'review.afterDelivery': 'You can review this product after it is delivered to you.',
+    'review.done': 'Reviewed', 'review.noneYet': 'No reviews yet', 'review.noneSeller': 'No reviews yet',
+    'review.noneSellerText': 'Reviews appear here after customers receive their orders.', 'review.deletedProduct': '(deleted product)',
+    'review.noComment': '(no comment)', 'review.report': 'Report', 'review.reportedNote': 'Reported – waiting for admin.',
+    'review.reportTitle': 'Report this review', 'review.reportText': 'Admin will check the review and hide it if it is abusive or fake.',
+    'review.reportReason': 'Reason (optional)', 'review.filter': 'Show', 'review.allRatings': 'All ratings',
+
+    // Cart & checkout
+    'cart.title': 'Your Cart', 'cart.added': '"{name}" added to cart', 'cart.maxReached': 'Only {n} available – you already have all of them in your cart.',
+    'cart.ownProduct': 'This is your own product.', 'cart.removed': 'Removed from cart',
+    'cart.removedUnavailable': 'Removed because no longer available: {names}', 'cart.empty': 'Your cart is empty',
+    'cart.emptyText': 'Explore handmade products from local SHGs and artisans.', 'cart.soldBy': 'Sold by {name}',
+    'cart.deliveryFrom': 'Delivery charge ({name})', 'cart.summary': 'Order summary', 'cart.items': 'Items ({n})', 'cart.delivery': 'Delivery',
+    'cart.total': 'Total', 'cart.multiSeller': 'Your cart has products from {n} sellers. A separate order will be created for each seller.',
+    'cart.checkout': 'Proceed to checkout', 'cart.continue': 'Continue shopping',
+    'checkout.title': 'Checkout', 'checkout.step1': 'Cart', 'checkout.step2': 'Address & payment', 'checkout.step3': 'Order placed',
+    'checkout.address': 'Delivery address', 'checkout.receiver': 'Receiver name', 'checkout.addressLine': 'House no., street, area',
+    'checkout.city': 'City / village', 'checkout.state': 'State', 'checkout.pincode': 'PIN code', 'checkout.payment': 'Payment method',
+    'checkout.codHint': 'Pay when you receive the product', 'checkout.upiHint': "Pay to the seller's UPI ID using any UPI app",
+    'checkout.upiUnavailable': 'UPI is not available because a seller in your cart has not added a UPI ID yet.',
+    'checkout.note': 'Note for the seller (optional)', 'checkout.notePh': 'e.g. size, colour, best time to deliver',
+    'checkout.place': 'Place order', 'checkout.safe': 'We never ask for your card, bank or UPI PIN.', 'checkout.yourOrder': 'Your order',
+
+    // Customer orders
+    'orders.subtitle': 'Track your orders and give reviews after delivery.', 'orders.active': 'Active', 'orders.order': 'Order',
+    'orders.none': 'No orders yet', 'orders.noneText': 'When you buy something, you can track it here.',
+    'orders.track': 'Track order', 'orders.payNow': 'Pay with UPI', 'orders.review': 'Write review', 'orders.placedMany': '{n} orders placed successfully – one for each seller.',
+
+    // Order details & tracking
+    'order.title': 'Order details', 'order.notFound': 'Order not found', 'order.placedTitle': 'Order placed successfully!',
+    'order.placedText': 'The seller has been notified. You will get a notification at every step.',
+    'order.placedOn': 'Placed on {date}', 'order.nextStep': 'Next step', 'order.tracking': 'Delivery tracking', 'order.timeline': 'Order progress',
+    'order.inProgress': 'In progress', 'order.waiting': 'Waiting', 'order.stepDone': 'completed', 'order.stepCurrent': 'current step', 'order.stepPending': 'not started',
+    'order.trackingNote': 'Status updates are entered by the seller. Live GPS tracking is not available in this prototype.',
+    'order.deliveryPartner': 'Delivery partner', 'order.deliveryPartnerPh': 'e.g. Self delivery, India Post, local courier',
+    'order.trackingId': 'Tracking number', 'order.expectedDate': 'Expected delivery date', 'order.items': 'Items', 'order.payment': 'Payment',
+    'order.itemsTotal': 'Items total', 'order.method': 'Method', 'order.paymentStatus': 'Payment status', 'order.reference': 'Transaction reference',
+    'order.paidOn': 'Paid on', 'order.deliverTo': 'Deliver to', 'order.customer': 'Customer & delivery address', 'order.phone': 'Phone',
+    'order.customerNote': 'Customer note', 'order.seller': 'Seller', 'order.messageCustomer': 'Message customer',
+    'order.waCustomer': 'Hello {name}, update on your SHG Connect order {order}: {status}.',
+    'order.changeTo': 'Change order {order} to "{status}"?', 'order.note': 'Note for the customer', 'order.cancelReason': 'Reason for cancelling',
+    'order.cancelTitle': 'Cancel order',
+    'order.action.confirm': 'Confirm order', 'order.action.process': 'Start preparing', 'order.action.ready': 'Mark ready to ship',
+    'order.action.ship': 'Mark as shipped', 'order.action.outForDelivery': 'Out for delivery', 'order.action.deliver': 'Mark as delivered',
+    'order.action.cancel': 'Cancel order',
+    'order.hint.new': 'A customer placed this order. Check stock and confirm it.',
+    'order.hint.confirmed': 'Start preparing / packing the product.',
+    'order.hint.processing': 'When the parcel is packed, mark it ready to ship.',
+    'order.hint.ready_to_ship': 'Hand over to the courier (or deliver yourself) and mark it shipped.',
+    'order.hint.shipped': 'When the parcel reaches the customer\'s area, mark it out for delivery.',
+    'order.hint.out_for_delivery': 'After the customer receives it, mark it delivered. Cash on Delivery is marked paid automatically.',
+    'order.hint.delivered': 'Order completed.', 'order.hint.cancelled': 'This order was cancelled.',
+
+    // UPI (demo)
+    'upi.title': 'Pay with UPI', 'upi.step1': 'Scan the QR code or open your UPI app to pay {amount} to the seller.',
+    'upi.loading': 'Preparing UPI details…', 'upi.payTo': 'Pay to', 'upi.upiId': 'UPI ID', 'upi.openApp': 'Open UPI app',
+    'upi.openAppHint': 'Works on phones with a UPI app installed.', 'upi.qrAlt': 'UPI QR code for {upi}',
+    'upi.refLabel': 'After paying, enter the UPI transaction ID (UTR)', 'upi.refPh': 'e.g. 412345678901',
+    'upi.refHint': 'You can find it in your UPI app under payment history.', 'upi.submit': 'I have paid – send to seller',
+    'upi.refError': 'Please enter the transaction ID shown in your UPI app (6–30 letters or numbers)',
+    'upi.demoNote': 'Demo payment flow: money goes directly to the seller through your UPI app. SHG Connect never asks for your UPI PIN.',
+    'upi.waiting': 'Payment sent for verification', 'upi.waitingText': 'Reference {ref} was sent to the seller. The status will change to Paid after they confirm.',
+
+    // Seller dashboard
+    'dash.hello': 'Namaste, {name}!', 'dash.introMsg': 'Here is how your shop is doing.', 'dash.newOrdersMsg': 'You have {n} new order(s) waiting for confirmation.',
+    'dash.newOrdersAlert': '{n} new order(s)!', 'dash.tapToConfirm': 'Tap here to confirm them.',
+    'dash.setupTitle': 'Get started in 4 simple steps', 'dash.setup.profile': 'Tell customers about yourself', 'dash.setup.upi': 'Add your UPI ID to receive payments',
+    'dash.setup.product': 'Add your first product', 'dash.setup.publish': 'Publish a product',
+    'dash.totalProducts': 'Total Products', 'dash.activeOrders': 'Active Orders', 'dash.completedOrders': 'Completed Orders', 'dash.totalSales': 'Total Sales',
+    'dash.viewOrders': 'View Orders', 'dash.promote': 'Promote Products', 'dash.recentOrders': 'Recent Orders', 'dash.noOrders': 'No orders yet',
+    'dash.noOrdersText': 'Promote your products so more customers can find them.', 'dash.salesSummary': 'Sales Summary', 'dash.last7': 'Last 7 days',
+    'dash.topProducts': 'Top Products', 'dash.views': 'views', 'dash.sold': 'sold', 'dash.visibility': 'Product Views & Promotion',
+    'dash.productViews': 'Total product views', 'dash.promotionStatus': 'Promotion Status', 'dash.noPromotions': 'No active promotions.',
+    'dash.help': 'Need help?',
+
+    // Seller products
+    'sp.intro': 'All your products. Drafts and products waiting for approval are only visible to you.', 'sp.live': 'Live', 'sp.search': 'Search my products',
+    'sp.none': 'No products yet', 'sp.noneText': 'Add your first product and start reaching customers.', 'sp.noMatch': 'No products match',
+    'sp.stock': 'Stock', 'sp.rejected': 'Not approved', 'sp.pendingNote': 'Waiting for admin approval.', 'sp.promote': 'Promote',
+    'sp.preview': 'Preview', 'sp.confirmDelete': 'Delete "{name}"? This cannot be undone.', 'sp.deleted': 'Product deleted',
+
+    // Add product
+    'ap.step1': '1. Photos & name', 'ap.step2': '2. Price & stock', 'ap.step3': '3. Details & delivery',
+    'ap.s1Title': 'Add photos and a simple name', 'ap.s2Title': 'Set your price and stock', 'ap.s3Title': 'Describe it and choose delivery',
+    'ap.photos': 'Product photos', 'ap.addPhotos': 'Tap to add photos', 'ap.photoRules': 'JPG, PNG or WebP · up to 5 MB each · max 5 photos',
+    'ap.photoCount': '{n} of {max} photos', 'ap.photoN': 'Photo {n}', 'ap.cover': 'Cover', 'ap.removePhoto': 'Remove photo {n}',
+    'ap.name': 'Product name', 'ap.namePh': 'e.g. Handmade Bamboo Basket', 'ap.tipName': 'Keep the product name simple',
+    'ap.chooseCategory': 'Choose a category', 'ap.price': 'Selling price (₹)', 'ap.tipPrice': 'Enter the actual selling price',
+    'ap.quantity': 'Quantity available', 'ap.qtyHint': 'How many pieces can you sell now?', 'ap.discount': 'Discount % (optional)',
+    'ap.pricePreview': 'Customers will see: {final}', 'ap.pricePreviewDiscount': 'Customers will see: {final} (was {price}, {d}% off)',
+    'ap.descPh': 'Size, material, colour, how it is made, care instructions…', 'ap.tipDesc': 'Mention size/material',
+    'ap.delivery': 'Delivery availability', 'ap.charge': 'Delivery charge (₹)', 'ap.tags': 'Tags (optional)', 'ap.tagsPh': 'bamboo, gift, eco-friendly',
+    'ap.tagsHint': 'Separate with commas. Helps customers find you.', 'ap.saveDraft': 'Save Draft', 'ap.publish': 'Publish Product',
+    'ap.tipsTitle': 'Tips to sell more', 'ap.tip1': 'Add clear photos in daylight. The first photo is the cover.', 'ap.tip2': 'Keep the product name simple.',
+    'ap.tip3': 'Mention size/material.', 'ap.tip4': 'Enter the actual selling price.', 'ap.tip5': 'Short on time? Save a draft and finish later.',
+    'ap.editTitle': 'Edit Product', 'ap.currentStatus': 'Current status', 'ap.notYours': 'You can only edit your own products.',
+    'ap.badType': '"{name}" is not a JPG, PNG or WebP image.', 'ap.tooBig': '"{name}" is larger than {mb} MB.', 'ap.tooMany': 'You can add up to {max} photos.',
+    'ap.val.photo': 'Please add at least one clear photo.', 'ap.val.name': 'Please enter the product name', 'ap.val.nameLong': 'Product name is too long (max 100)',
+    'ap.val.category': 'Please choose a category', 'ap.val.price': 'Please enter the price', 'ap.val.priceMin': 'Price must be at least ₹1',
+    'ap.val.priceMax': 'Price looks too high', 'ap.val.qty': 'Please enter the quantity', 'ap.val.qtyNeg': 'Quantity must be 0 or more (whole number)',
+    'ap.val.discount': 'Discount must be between 0 and 90%', 'ap.val.charge': 'Delivery charge cannot be negative', 'ap.val.desc': 'Description is too long (max 2000)',
+    'ap.draftSaved': 'Draft saved', 'ap.published': 'Product published!', 'ap.updated': 'Product updated',
+    'ap.promoteNow': 'Promote it now', 'ap.viewLive': 'View product', 'ap.addAnother': 'Add another product',
+
+    // Seller orders / delivery
+    'so.intro': 'New orders appear here. Use the green button to move each order to the next step.',
+    'so.search': 'Search order number (e.g. SC1001)', 'so.none': 'No orders here', 'so.noneText': 'New orders will appear here. Promoting products helps you get more orders.',
+    'so.col.order': 'Order ID', 'so.col.customer': 'Customer', 'so.col.product': 'Product', 'so.col.qty': 'Qty', 'so.col.amount': 'Amount',
+    'so.col.payment': 'Payment', 'so.col.status': 'Order status', 'so.col.date': 'Date', 'so.col.action': 'Action',
+    'del.intro': 'Update the delivery status so customers know where their order is. This is status tracking entered by you – there is no live GPS tracking.',
+    'del.count': '{n} order(s) to deliver', 'del.none': 'Nothing to deliver right now', 'del.noneText': 'Confirmed orders that are not yet delivered will appear here.',
+
+    // Sales
+    'sales.range': 'Date range', 'sales.today': 'Today', 'sales.week': 'This week', 'sales.month': 'This month', 'sales.year': 'Last 12 months',
+    'sales.custom': 'Custom range', 'sales.from': 'From', 'sales.to': 'To', 'sales.applyRange': 'Show',
+    'sales.showing': 'Showing {from} – {to}', 'sales.totalSales': 'Total sales', 'sales.revenue': 'Revenue received', 'sales.cancelled': 'Cancelled orders',
+    'sales.explain': '{orders} orders · average order {avg} · {items} items sold (top products)', 'sales.overTime': 'Sales over time',
+    'sales.byStatus': 'Orders by status', 'sales.mostSold': 'Most sold products', 'sales.orders': 'Orders in this period',
+    'sales.none': 'No sales in this period', 'sales.noneText': 'Try a longer date range.', 'sales.ordersN': '{n} orders',
+    'sales.chooseDates': 'Please choose both dates.', 'sales.dateOrder': 'Start date must be before end date.',
+    'chart.noData': 'No data for this period yet', 'chart.showTable': 'Show as table', 'chart.period': 'Period',
+
+    // Promotions
+    'promo.intro': 'Promotion is free in this prototype. Promoted products appear in "Promoted Products" on the marketplace, featured products appear on the home page, and discounts show a price tag.',
+    'promo.yours': 'Your promotions', 'promo.new': 'Promote a product', 'promo.product': 'Product', 'promo.chooseProduct': 'Choose a live product',
+    'promo.type': 'Promotion type', 'promo.type.promoted': 'Promote', 'promo.type.featured': 'Feature', 'promo.type.discount': 'Discount',
+    'promo.promotedHint': 'Show in "Promoted Products" on the marketplace', 'promo.featuredHint': 'Show in "Featured Products" on the home page',
+    'promo.discountHint': 'Offer a limited-time discount', 'promo.discountPercent': 'Discount %', 'promo.duration': 'Duration',
+    'promo.d3': '3 days', 'promo.d7': '7 days', 'promo.d15': '15 days', 'promo.d30': '30 days', 'promo.start': 'Start promotion',
+    'promo.none': 'No promotions yet', 'promo.noneText': 'Promote a product to show it to more customers.',
+    'promo.noLive': 'No live products', 'promo.noLiveText': 'Publish a product first, then promote it here.',
+    'promo.views': 'views', 'promo.clicks': 'clicks', 'promo.orders': 'orders', 'promo.daysLeft': '{n} days left', 'promo.activeDays': 'Active · {n} days left',
+    'promo.extend': 'Extend 7 days', 'promo.stop': 'Stop', 'promo.confirmStop': 'Stop this promotion now?',
+    'promo.val.product': 'Please choose a product', 'promo.val.type': 'Please choose a type', 'promo.val.duration': 'Please choose a duration',
+    'promo.val.discount': 'Discount must be between 5% and 90%',
+
+    // Payments
+    'pay.noUpi': 'Add your UPI ID so customers can pay you online.', 'pay.addUpi': 'Add UPI ID', 'pay.received': 'Payment received',
+    'pay.pendingAmount': 'Pending (incl. COD to collect)',
+    'pay.howItWorks': 'UPI payments go directly to your UPI ID. When a customer sends a transaction reference (UTR), check your UPI app and press "Mark as paid". Cash on Delivery orders are marked paid automatically when delivered.',
+    'pay.none': 'No orders for this filter', 'pay.markPaid': 'Mark as paid', 'pay.notReceived': 'Not received', 'pay.markRefunded': 'Mark refunded',
+    'pay.verifyHint': 'Check your UPI app for the reference before marking it paid.',
+    'pay.confirm.paid': 'Confirm you received {amount} for order {order}?', 'pay.confirm.failed': 'Mark payment for {order} as not received? The customer will be notified.',
+    'pay.confirm.refunded': 'Confirm you refunded {amount} for order {order}?', 'pay.confirm.pending': 'Set payment for {order} back to pending?',
+
+    // Profile & settings
+    'profile.welcomeTitle': 'Welcome to SHG Connect!', 'profile.welcomeText': 'Step 1: tell customers about you and add your UPI ID. Then add your first product.',
+    'profile.personal': 'Personal details', 'profile.photo': 'Profile photo', 'profile.photoHint': 'JPG, PNG or WebP, up to 2 MB',
+    'profile.business': 'Business / SHG details', 'profile.viewPublic': 'View public profile', 'profile.sellerType': 'Seller type',
+    'profile.businessName': 'Business / SHG name', 'profile.description': 'About you / your group',
+    'profile.descriptionPh': 'What do you make? Since when? What makes it special?', 'profile.descriptionHint': 'Customers trust sellers who share their story.',
+    'profile.categories': 'Product categories', 'profile.paymentDelivery': 'Payment & delivery', 'profile.upi': 'UPI ID',
+    'profile.upiHint': 'Customers pay directly to this UPI ID. It is shown only on their order payment screen. Never share your UPI PIN.',
+    'profile.deliveryOptions': 'Delivery options you offer', 'profile.saved': 'Profile saved', 'profile.nextStep': 'Great! Next step: add your first product.',
+    'settings.language': 'Language', 'settings.chooseLanguage': 'Choose your language', 'settings.whatsapp': 'WhatsApp contact',
+    'settings.waLabel': 'Show "Chat on WhatsApp" button on my products', 'settings.waHint': 'Customers will be able to message your registered mobile number on WhatsApp.',
+    'settings.waOn': 'WhatsApp button is now visible to customers', 'settings.waOff': 'WhatsApp button hidden',
+    'settings.password': 'Change password', 'settings.current': 'Current password', 'settings.new': 'New password', 'settings.updatePassword': 'Update password',
+
+    // Notifications
+    'notif.title': 'Notifications', 'notif.markAll': 'Mark all as read', 'notif.viewAll': 'See all notifications', 'notif.empty': 'No notifications',
+    'notif.emptyText': 'You will be notified about orders, payments and reviews here.', 'notif.unreadOnly': 'Unread only', 'notif.aria': 'Notifications, {n} unread',
+
+    // Admin
+    'admin.title': 'Admin Dashboard',
+    'admin.nav.overview': 'Overview', 'admin.nav.users': 'Users & Sellers', 'admin.nav.products': 'Product Listings', 'admin.nav.orders': 'Orders',
+    'admin.nav.reviews': 'Review Moderation', 'admin.nav.categories': 'Categories', 'admin.nav.reports': 'Reports',
+    'admin.totalSellers': 'Total sellers', 'admin.totalCustomers': 'Total customers', 'admin.totalProducts': 'Total products', 'admin.totalOrders': 'Total orders',
+    'admin.completedOrders': 'Completed orders', 'admin.gmv': 'Total sales value', 'admin.pendingProducts': 'Products to approve', 'admin.flaggedReviews': 'Reported reviews',
+    'admin.waitingApproval': 'Waiting for approval', 'admin.noPending': 'No products waiting for approval.', 'admin.reportedReviews': 'Reported reviews',
+    'admin.noFlagged': 'No reported reviews.', 'admin.approve': 'Approve', 'admin.reject': 'Reject', 'admin.feature': 'Feature', 'admin.unfeature': 'Remove feature',
+    'admin.featureArtisan': 'Feature artisan', 'admin.viewProfile': 'Profile', 'admin.suspend': 'Suspend', 'admin.activate': 'Activate',
+    'admin.confirmSuspend': 'Suspend this account? The user cannot login and their products will be hidden.',
+    'admin.searchUsers': 'Search name, email, phone', 'admin.searchProducts': 'Search products', 'admin.role': 'Role', 'admin.allRoles': 'All roles',
+    'admin.sellers': 'All sellers', 'admin.status': 'Status', 'admin.allStatus': 'All statuses',
+    'admin.col.name': 'Name', 'admin.col.contact': 'Contact', 'admin.col.location': 'Location', 'admin.col.joined': 'Joined', 'admin.col.actions': 'Actions', 'admin.col.price': 'Price',
+    'admin.nothing': 'Nothing to show', 'admin.manage': 'Manage', 'admin.rejectTitle': 'Reject product', 'admin.rejectReason': 'Reason (shown to the seller)',
+    'admin.rejectPh': 'e.g. Photo is not clear', 'admin.reportedFor': 'Reported for', 'admin.keepReview': 'Keep', 'admin.hideReview': 'Hide',
+    'admin.addCategory': 'Add category', 'admin.editCategory': 'Edit category', 'admin.catName': 'Name (English)', 'admin.catNameHi': 'Name (Hindi)',
+    'admin.catIcon': 'Icon', 'admin.catIconHint': 'Lucide icon name, e.g. gem, shirt, package', 'admin.hide': 'Hide', 'admin.show': 'Show',
+    'admin.confirmDeleteCat': 'Delete this category?', 'admin.val.catName': 'Please enter a category name',
+    'admin.monthlySales': 'Monthly sales (last 6 months)', 'admin.salesByCategory': 'Sales by category', 'admin.topSellers': 'Top sellers',
+    'admin.usersByRole': 'Users by role', 'admin.paymentsReport': 'Payments', 'admin.count': 'Count',
+
+    // Notification templates (rebuilt in the chosen language)
+    'notif.new_order.title': 'New order received', 'notif.new_order.msg': 'Order {orderNumber} for {amount}. Please confirm it.',
+    'notif.payment_received.title': 'UPI payment received – please verify', 'notif.payment_received.msg': 'Order {orderNumber}: {amount}. Ref: {reference}.',
+    'notif.order_cancelled.title': 'Order cancelled', 'notif.order_cancelled.msg': 'Order {orderNumber} was cancelled.',
+    'notif.new_review.title': 'New review', 'notif.new_review.msg': '{customer} rated "{productName}" {rating}★.',
+    'notif.delivery_update.title': 'Delivery status updated', 'notif.delivery_update.msg': 'Order {orderNumber}: {status}.',
+    'notif.order_confirmed.title': 'Order confirmed', 'notif.order_confirmed.msg': 'Your order {orderNumber} is now: {status}.',
+    'notif.order_shipped.title': 'Order shipped', 'notif.order_shipped.msg': 'Your order {orderNumber} is now: {status}.',
+    'notif.out_for_delivery.title': 'Out for delivery', 'notif.out_for_delivery.msg': 'Your order {orderNumber} is now: {status}.',
+    'notif.delivered.title': 'Order delivered', 'notif.delivered.msg': 'Your order {orderNumber} is now: {status}.',
+    'notif.product_status.title': 'Product update', 'notif.product_status.msg': '"{productName}": {status}.'
+  };
+
+  const hi = {
+    'brand.tagline': 'स्थानीय कारीगरों का बाज़ार',
+    'nav.home': 'होम', 'nav.explore': 'उत्पाद देखें', 'nav.howItWorks': 'यह कैसे काम करता है', 'nav.about': 'परिचय',
+    'nav.login': 'लॉगिन', 'nav.register': 'रजिस्टर करें', 'nav.cart': 'कार्ट', 'nav.account': 'मेरा खाता', 'nav.main': 'मुख्य मेनू',
+    'nav.myOrders': 'मेरे ऑर्डर', 'nav.profile': 'प्रोफ़ाइल', 'nav.settings': 'सेटिंग्स', 'nav.logout': 'लॉगआउट',
+    'nav.sellerDashboard': 'विक्रेता डैशबोर्ड', 'nav.adminDashboard': 'एडमिन डैशबोर्ड', 'nav.dashboardMenu': 'डैशबोर्ड मेनू',
+    'nav.dashboard': 'डैशबोर्ड', 'nav.myProducts': 'मेरे उत्पाद', 'nav.addProduct': 'उत्पाद जोड़ें', 'nav.orders': 'ऑर्डर',
+    'nav.delivery': 'डिलीवरी', 'nav.sales': 'बिक्री इतिहास', 'nav.reviews': 'समीक्षाएँ', 'nav.promotions': 'प्रचार',
+    'nav.payments': 'भुगतान', 'nav.marketplace': 'बाज़ार',
+    'lang.choose': 'भाषा चुनें',
+
+    'common.close': 'बंद करें', 'common.cancel': 'रद्द करें', 'common.yes': 'हाँ', 'common.confirm': 'पुष्टि करें', 'common.back': 'वापस',
+    'common.next': 'आगे', 'common.prev': 'पिछला', 'common.save': 'सेव करें', 'common.saveChanges': 'बदलाव सेव करें', 'common.edit': 'बदलें',
+    'common.delete': 'हटाएँ', 'common.remove': 'हटाएँ', 'common.details': 'विवरण', 'common.viewAll': 'सभी देखें',
+    'common.loading': 'लोड हो रहा है…', 'common.pleaseWait': 'कृपया रुकें…', 'common.retry': 'फिर से कोशिश करें', 'common.optional': 'वैकल्पिक',
+    'common.areYouSure': 'क्या आप निश्चित हैं?', 'common.skip': 'मुख्य सामग्री पर जाएँ', 'common.openMenu': 'मेनू खोलें',
+    'common.closeMenu': 'मेनू बंद करें', 'common.pagination': 'पेज', 'common.breadcrumb': 'पथ',
+
+    'time.justNow': 'अभी', 'time.minutes': '{n} मिनट पहले', 'time.hour': '1 घंटा पहले', 'time.hours': '{n} घंटे पहले', 'time.day': 'कल', 'time.days': '{n} दिन पहले',
+
+    'err.network': 'सर्वर से संपर्क नहीं हो पा रहा। कृपया इंटरनेट जाँचें।', 'err.generic': 'कुछ गलत हो गया। कृपया फिर से कोशिश करें।',
+    'err.loadTitle': 'यह भाग लोड नहीं हो सका', 'err.404Title': 'पेज नहीं मिला', 'err.404Text': 'आप जो पेज ढूँढ रहे हैं वह मौजूद नहीं है।',
+    'val.fixErrors': 'कृपया लाल रंग वाले खाने ठीक करें।', 'val.identifier': 'कृपया ईमेल या मोबाइल नंबर लिखें', 'val.passwordRequired': 'कृपया पासवर्ड लिखें',
+    'val.name': 'कृपया पूरा नाम लिखें', 'val.email': 'कृपया सही ईमेल लिखें', 'val.phone': 'कृपया सही 10 अंकों का मोबाइल नंबर लिखें',
+    'val.passwordLength': 'पासवर्ड कम से कम 6 अक्षर का हो', 'val.passwordNumber': 'पासवर्ड में कम से कम एक अंक हो', 'val.passwordMatch': 'दोनों पासवर्ड एक जैसे नहीं हैं',
+    'val.location': 'कृपया गाँव / शहर लिखें', 'val.role': 'कृपया चुनें कि आप क्या करना चाहते हैं', 'val.receiver': 'कृपया प्राप्तकर्ता का नाम लिखें',
+    'val.address': 'कृपया पूरा पता लिखें', 'val.city': 'कृपया शहर / गाँव लिखें', 'val.state': 'कृपया राज्य लिखें',
+    'val.pincode': 'कृपया सही 6 अंकों का पिन कोड लिखें', 'val.payment': 'कृपया भुगतान का तरीका चुनें', 'val.upi': 'कृपया सही UPI ID लिखें (जैसे name@upi)',
+
+    'role.customer': 'ग्राहक', 'role.artisan': 'कारीगर / विक्रेता', 'role.shg_member': 'SHG सदस्य', 'role.shg_leader': 'SHG लीडर',
+    'role.producer': 'लघु उत्पादक', 'role.admin': 'एडमिन',
+
+    'status.new': 'नया', 'order.placedStep': 'ऑर्डर किया गया', 'status.confirmed': 'पुष्टि हुई', 'status.processing': 'तैयारी में', 'status.ready_to_ship': 'भेजने को तैयार',
+    'status.shipped': 'भेज दिया', 'status.out_for_delivery': 'डिलीवरी के लिए निकला', 'status.delivered': 'पहुँच गया', 'status.cancelled': 'रद्द',
+    'status.pending': 'बाकी', 'status.paid': 'भुगतान हुआ', 'status.failed': 'असफल', 'status.refunded': 'वापस किया',
+    'status.approved': 'लाइव', 'status.rejected': 'अस्वीकृत', 'status.draft': 'ड्राफ्ट', 'status.flagged': 'रिपोर्ट की गई', 'status.hidden': 'छिपाया गया',
+    'status.active': 'सक्रिय', 'status.suspended': 'निलंबित', 'status.ended': 'समाप्त',
+
+    'payment.cod': 'कैश ऑन डिलीवरी', 'payment.upi': 'UPI',
+    'delivery.pickup': 'केवल पिकअप', 'delivery.local': 'स्थानीय डिलीवरी', 'delivery.state': 'राज्य के अंदर', 'delivery.nationwide': 'पूरे भारत में', 'delivery.free': 'मुफ़्त',
+
+    'cat.handicrafts': 'हस्तशिल्प', 'cat.handloom': 'हथकरघा', 'cat.embroidery': 'कढ़ाई', 'cat.food': 'खाद्य उत्पाद',
+    'cat.jewelry': 'आभूषण', 'cat.pottery': 'मिट्टी के बर्तन', 'cat.wooden': 'लकड़ी के उत्पाद', 'cat.agri': 'कृषि',
+
+    'home.eyebrow': 'स्थानीय उत्पाद · भरोसेमंद विक्रेता',
+    'home.title': 'स्थानीय उत्पाद खोजें। <span>स्थानीय कारीगरों का साथ दें।</span>',
+    'home.subtitle': 'स्वयं सहायता समूहों (SHG), कारीगरों और लघु उत्पादकों से सीधे जुड़ें।',
+    'home.ctaExplore': 'उत्पाद देखें', 'home.ctaSell': 'अपने उत्पाद बेचें',
+    'home.trust1': 'सीधे बनाने वालों से', 'home.trust2': 'UPI और कैश ऑन डिलीवरी', 'home.trust3': 'English और हिंदी',
+    'home.whyEyebrow': 'हमारे फील्ड सर्वे पर आधारित', 'home.whyTitle': 'SHG Connect क्यों?',
+    'home.why1': 'ज़्यादा ग्राहकों तक पहुँचें', 'home.why1Text': 'आपके उत्पाद गाँव और स्थानीय बाज़ार के बाहर के खरीदारों को भी दिखेंगे।',
+    'home.why1Note': 'सर्वे: नए ग्राहक ढूँढना एक बड़ी समस्या है',
+    'home.why2': 'अपने उत्पादों का प्रचार करें', 'home.why2Text': 'मुफ़्त प्रचार, फ़ीचर्ड लिस्टिंग और छूट से आपके उत्पाद अलग दिखेंगे।',
+    'home.why2Note': 'सर्वे: प्रचार की कमी और कम पहचान',
+    'home.why3': 'ऑर्डर आसानी से संभालें', 'home.why3Text': 'अगले कदम के लिए एक बड़ा बटन – पुष्टि, पैकिंग, भेजना, डिलीवरी। हर नए ऑर्डर की सूचना।',
+    'home.why3Note': 'सर्वे: समय और ऑनलाइन जानकारी की कमी',
+    'home.why4': 'डिजिटल भुगतान पाएँ', 'home.why4Text': 'सीधे अपनी UPI ID पर भुगतान लें या कैश ऑन डिलीवरी। हर भुगतान का हिसाब रखें।',
+    'home.why4Note': 'सर्वे: भुगतान की समस्याएँ बताई गईं',
+    'home.categories': 'श्रेणी के अनुसार खरीदें', 'home.featuredEyebrow': 'चुने हुए', 'home.featured': 'फ़ीचर्ड उत्पाद',
+    'home.artisansEyebrow': 'बनाने वालों से मिलें', 'home.noArtisans': 'फ़ीचर्ड कारीगर यहाँ दिखेंगे।', 'home.noProductsText': 'उत्पाद जोड़ने वाले पहले विक्रेता बनें।',
+    'home.forSellers': 'विक्रेताओं के लिए', 'home.forCustomers': 'ग्राहकों के लिए',
+    'home.s1': 'प्रोफ़ाइल बनाएँ', 'home.s2': 'उत्पाद जोड़ें', 'home.s3': 'प्रचार करें', 'home.s4': 'ऑर्डर पाएँ', 'home.s5': 'डिलीवरी ट्रैक करें', 'home.s6': 'बिक्री देखें',
+    'home.c1': 'देखें', 'home.c2': 'खोजें', 'home.c3': 'उत्पाद देखें', 'home.c4': 'ऑर्डर करें', 'home.c5': 'भुगतान करें (UPI या कैश)', 'home.c6': 'ऑर्डर ट्रैक करें',
+    'home.startSelling': 'बेचना शुरू करें – मुफ़्त है', 'home.startShopping': 'खरीदारी शुरू करें',
+    'home.aboutEyebrow': 'कॉलेज फील्ड प्रोजेक्ट · तकनीकी प्रोटोटाइप', 'home.aboutTitle': 'प्रोजेक्ट के बारे में',
+    'home.about1': 'SHG Connect को स्वयं सहायता समूहों, कारीगरों और लघु उत्पादकों के साथ किए गए फील्ड सर्वे में मिली समस्याओं को ध्यान में रखकर बनाया गया है।',
+    'home.about2': 'उत्तरदाताओं ने ये सबसे बड़ी कठिनाइयाँ बताईं:',
+    'home.f1': 'नए ग्राहक ढूँढना और उत्पादों की कम पहचान', 'home.f2': 'उत्पाद प्रचार की कमी', 'home.f3': 'ऑनलाइन जानकारी और समय की कमी',
+    'home.f4': 'डिलीवरी और परिवहन की समस्याएँ', 'home.f5': 'भुगतान की समस्याएँ',
+    'home.about3': 'यह प्रोटोटाइप उत्पाद की पहचान, ग्राहकों तक पहुँच, आसान डिजिटल बिक्री, ऑर्डर प्रबंधन, डिलीवरी की जानकारी, बिक्री का हिसाब, समीक्षाएँ और डिजिटल भुगतान पर ध्यान देता है। यह कारीगरों की हर समस्या हल करने का दावा नहीं करता – यह दिखाता है कि आसान तकनीक कैसे मदद कर सकती है।',
+    'home.about4': 'ध्यान दें: UPI भुगतान डेमो तरीके से होता है (विक्रेता की अपनी UPI ID पर लिंक / QR)। डिलीवरी ट्रैकिंग में विक्रेता द्वारा डाली गई स्थिति दिखती है – लाइव GPS ट्रैकिंग नहीं है।',
+
+    'footer.about': 'एक आसान बाज़ार जो स्वयं सहायता समूहों, कारीगरों और छोटे उत्पादकों को ज़्यादा ग्राहकों तक पहुँचाता है।',
+    'footer.marketplace': 'बाज़ार', 'footer.project': 'प्रोजेक्ट', 'footer.legal': 'नियम', 'footer.contact': 'संपर्क', 'footer.privacy': 'गोपनीयता', 'footer.terms': 'शर्तें',
+    'footer.share': 'SHG Connect शेयर करें', 'footer.shareWhatsapp': 'WhatsApp पर शेयर करें', 'footer.shareFacebook': 'Facebook पर शेयर करें', 'footer.email': 'हमें ईमेल करें',
+    'footer.shareText': 'SHG Connect पर SHG और कारीगरों से सीधे हाथ से बने उत्पाद खरीदें:', 'footer.prototype': 'कॉलेज फील्ड-प्रोजेक्ट प्रोटोटाइप',
+    'footer.madeFor': 'SHG, कारीगरों और छोटे उत्पादकों के लिए',
+    'contact.text': 'SHG Connect एक कॉलेज फील्ड-प्रोजेक्ट प्रोटोटाइप है। प्रोजेक्ट से जुड़े सवाल या समस्या के लिए प्रोजेक्ट टीम से संपर्क करें।',
+    'contact.whatsapp': 'ऑर्डर के बारे में सवाल है? विक्रेता से सीधे बात करने के लिए उत्पाद या विक्रेता पेज पर "WhatsApp पर चैट करें" बटन दबाएँ।',
+    'contact.safety': 'हम कभी भी आपका पासवर्ड, OTP, कार्ड नंबर या UPI PIN नहीं माँगेंगे।',
+
+    'auth.loginTitle': 'फिर से स्वागत है', 'auth.loginSub': 'अपने ईमेल या मोबाइल नंबर से लॉगिन करें।', 'auth.identifier': 'ईमेल या मोबाइल नंबर',
+    'auth.password': 'पासवर्ड', 'auth.showPassword': 'पासवर्ड दिखाएँ', 'auth.hidePassword': 'पासवर्ड छिपाएँ', 'auth.noAccount': 'SHG Connect पर नए हैं?',
+    'auth.createAccount': 'खाता बनाएँ', 'auth.haveAccount': 'पहले से खाता है?', 'auth.demoTitle': 'डेमो खाते (कॉलेज प्रोजेक्ट)',
+    'auth.demoText': 'लॉगिन फ़ॉर्म भरने के लिए कोई भूमिका दबाएँ। विवरण README में है।', 'auth.registerTitle': 'अपना खाता बनाएँ',
+    'auth.registerSub': '2 मिनट से भी कम समय लगता है। बेचना मुफ़्त है।', 'auth.iAm': 'मैं चाहता/चाहती हूँ…', 'auth.roleCustomer': 'स्थानीय उत्पाद खरीदना',
+    'auth.roleArtisan': 'मैं उत्पाद बनाकर बेचता/बेचती हूँ', 'auth.roleMember': 'स्वयं सहायता समूह का सदस्य', 'auth.roleLeader': 'मैं अपने समूह के लिए बेचता/बेचती हूँ',
+    'auth.roleProducer': 'खेती / खाद्य / छोटी इकाई', 'auth.fullName': 'पूरा नाम', 'auth.mobile': 'मोबाइल नंबर', 'auth.mobileHint': '10 अंक, +91 के बिना',
+    'auth.email': 'ईमेल', 'auth.location': 'स्थान (गाँव / शहर, राज्य)', 'auth.locationPh': 'जैसे सतारा, महाराष्ट्र', 'auth.passwordHint': 'कम से कम 6 अक्षर और एक अंक',
+    'auth.confirmPassword': 'पासवर्ड दोबारा लिखें', 'auth.welcome': 'स्वागत है, {name}!', 'auth.registered': 'खाता बन गया! SHG Connect में आपका स्वागत है।',
+    'auth.loggedOut': 'आप लॉगआउट हो गए हैं।',
+
+    'market.title': 'उत्पाद देखें', 'market.subtitle': 'SHG, कारीगरों और छोटे उत्पादकों से सीधे हाथ से बने और घर के बने उत्पाद।',
+    'market.searchLabel': 'उत्पाद, विक्रेता या श्रेणी खोजें', 'market.searchPh': 'उत्पाद, विक्रेता या श्रेणी खोजें…', 'market.search': 'खोजें',
+    'market.categories': 'श्रेणियाँ', 'market.promoted': 'प्रचारित उत्पाद', 'market.featuredArtisans': 'फ़ीचर्ड कारीगर', 'market.featuredArtisan': 'फ़ीचर्ड कारीगर',
+    'market.filters': 'फ़िल्टर', 'market.showFilters': 'फ़िल्टर दिखाएँ', 'market.category': 'श्रेणी', 'market.allCategories': 'सभी श्रेणियाँ',
+    'market.searchSeller': 'विक्रेता से खोजें', 'market.sellerPh': 'विक्रेता या SHG का नाम', 'market.seller': 'विक्रेता', 'market.price': 'कीमत (₹)',
+    'market.min': 'न्यूनतम', 'market.max': 'अधिकतम', 'market.location': 'विक्रेता का स्थान', 'market.allLocations': 'सभी स्थान',
+    'market.inStockOnly': 'केवल उपलब्ध', 'market.apply': 'फ़िल्टर लगाएँ', 'market.clear': 'सब हटाएँ', 'market.all': 'सभी',
+    'market.resultsTitle': 'उत्पाद', 'market.results': '{n} उत्पाद मिले', 'market.sortBy': 'क्रम',
+    'market.sort.newest': 'सबसे नए', 'market.sort.priceAsc': 'कीमत: कम से ज़्यादा', 'market.sort.priceDesc': 'कीमत: ज़्यादा से कम',
+    'market.sort.popular': 'लोकप्रिय', 'market.sort.rating': 'सबसे अच्छी रेटिंग', 'market.loading': 'उत्पाद खोजे जा रहे हैं…',
+    'market.noResults': 'कोई उत्पाद नहीं मिला', 'market.noResultsText': 'दूसरा शब्द आज़माएँ, फ़िल्टर हटाएँ या दूसरी श्रेणी चुनें।',
+    'market.noProducts': 'अभी कोई उत्पाद नहीं', 'market.noPromoted': 'अभी कोई प्रचारित उत्पाद नहीं।', 'market.removeFilter': 'फ़िल्टर हटाएँ',
+    'market.priceError': 'न्यूनतम कीमत अधिकतम से ज़्यादा नहीं हो सकती।',
+
+    'product.promoted': 'प्रचारित', 'product.featured': 'फ़ीचर्ड', 'product.off': 'छूट', 'product.view': 'उत्पाद देखें', 'product.addToCart': 'कार्ट में डालें',
+    'product.soldOut': 'बिक गया', 'product.buyNow': 'अभी खरीदें', 'product.inStock': 'उपलब्ध', 'product.onlyLeft': 'केवल {n} बचे',
+    'product.outOfStock': 'स्टॉक में नहीं', 'product.noRatings': 'अभी कोई रेटिंग नहीं', 'product.ratingAria': '5 में से {rating} रेटिंग',
+    'product.notFound': 'उत्पाद नहीं मिला', 'product.notFoundText': 'यह उत्पाद हटा दिया गया है या अब उपलब्ध नहीं है।', 'product.photos': 'उत्पाद की फ़ोटो',
+    'product.photoN': 'फ़ोटो {n} दिखाएँ', 'product.availability': 'उपलब्धता', 'product.available': 'उपलब्ध', 'product.delivery': 'डिलीवरी',
+    'product.location': 'स्थान', 'product.quantity': 'मात्रा', 'product.decrease': 'मात्रा घटाएँ', 'product.increase': 'मात्रा बढ़ाएँ',
+    'product.contactWhatsapp': 'WhatsApp पर चैट करें', 'product.contactSeller': 'विक्रेता से संपर्क', 'product.shareWhatsapp': 'WhatsApp पर शेयर करें',
+    'product.waContactText': 'नमस्ते! मैंने SHG Connect पर आपका उत्पाद "{name}" देखा और इसके बारे में जानना चाहता/चाहती हूँ। {url}',
+    'product.waShareText': 'SHG Connect पर यह हाथ से बना उत्पाद देखें: {name} – {price} {url}',
+    'product.description': 'विवरण', 'product.noDescription': 'अभी कोई विवरण नहीं।', 'product.aboutSeller': 'विक्रेता के बारे में',
+    'product.viewSellerProducts': 'इस विक्रेता के सभी उत्पाद देखें', 'product.reviews': 'ग्राहक समीक्षाएँ', 'product.yourProduct': 'यह आपका उत्पाद है।',
+    'product.notPublic': 'यह उत्पाद ग्राहकों को नहीं दिख रहा (स्थिति: {status})।',
+
+    'seller.products': 'उत्पाद', 'seller.memberSince': '{date} से सदस्य', 'seller.about': 'परिचय', 'seller.categories': 'श्रेणियाँ', 'seller.delivery': 'डिलीवरी',
+    'seller.productsBy': '{name} के उत्पाद', 'seller.noProducts': 'अभी कोई उत्पाद नहीं।', 'seller.notFound': 'विक्रेता नहीं मिला',
+    'seller.waText': 'नमस्ते {name}! मैंने आपको SHG Connect पर देखा।',
+
+    'review.yourRating': 'आपकी रेटिंग', 'review.stars': 'स्टार', 'review.none': 'अभी कोई समीक्षा नहीं। ग्राहक डिलीवरी के बाद समीक्षा कर सकते हैं।',
+    'review.basedOn': '{n} समीक्षाओं के आधार पर', 'review.distribution': 'रेटिंग का बँटवारा', 'review.verified': 'सत्यापित खरीदार', 'review.write': 'समीक्षा लिखें',
+    'review.comment': 'आपकी समीक्षा (वैकल्पिक)', 'review.commentPh': 'गुणवत्ता, पैकिंग और डिलीवरी कैसी थी?', 'review.submit': 'समीक्षा भेजें',
+    'review.chooseRating': 'कृपया स्टार रेटिंग चुनें', 'review.thanks': 'आपकी समीक्षा के लिए धन्यवाद!', 'review.thanksAlready': 'आप इस उत्पाद की समीक्षा कर चुके हैं। धन्यवाद!',
+    'review.afterDelivery': 'उत्पाद मिलने के बाद आप इसकी समीक्षा कर सकते हैं।', 'review.done': 'समीक्षा की गई', 'review.noneYet': 'अभी कोई समीक्षा नहीं',
+    'review.noneSeller': 'अभी कोई समीक्षा नहीं', 'review.noneSellerText': 'ग्राहकों को ऑर्डर मिलने के बाद समीक्षाएँ यहाँ दिखेंगी।',
+    'review.deletedProduct': '(हटाया गया उत्पाद)', 'review.noComment': '(कोई टिप्पणी नहीं)', 'review.report': 'रिपोर्ट करें', 'review.reportedNote': 'रिपोर्ट की गई – एडमिन जाँच करेंगे।',
+    'review.reportTitle': 'इस समीक्षा की रिपोर्ट करें', 'review.reportText': 'अगर समीक्षा अपमानजनक या नकली है तो एडमिन इसे छिपा देंगे।',
+    'review.reportReason': 'कारण (वैकल्पिक)', 'review.filter': 'दिखाएँ', 'review.allRatings': 'सभी रेटिंग',
+
+    'cart.title': 'आपका कार्ट', 'cart.added': '"{name}" कार्ट में डाला गया', 'cart.maxReached': 'केवल {n} उपलब्ध हैं – सभी पहले से आपके कार्ट में हैं।',
+    'cart.ownProduct': 'यह आपका अपना उत्पाद है।', 'cart.removed': 'कार्ट से हटाया गया', 'cart.removedUnavailable': 'उपलब्ध न होने के कारण हटाए गए: {names}',
+    'cart.empty': 'आपका कार्ट खाली है', 'cart.emptyText': 'स्थानीय SHG और कारीगरों के हाथ से बने उत्पाद देखें।', 'cart.soldBy': 'विक्रेता: {name}',
+    'cart.deliveryFrom': 'डिलीवरी शुल्क ({name})', 'cart.summary': 'ऑर्डर सारांश', 'cart.items': 'सामान ({n})', 'cart.delivery': 'डिलीवरी', 'cart.total': 'कुल',
+    'cart.multiSeller': 'आपके कार्ट में {n} विक्रेताओं के उत्पाद हैं। हर विक्रेता के लिए अलग ऑर्डर बनेगा।', 'cart.checkout': 'चेकआउट करें', 'cart.continue': 'खरीदारी जारी रखें',
+    'checkout.title': 'चेकआउट', 'checkout.step1': 'कार्ट', 'checkout.step2': 'पता और भुगतान', 'checkout.step3': 'ऑर्डर हो गया',
+    'checkout.address': 'डिलीवरी का पता', 'checkout.receiver': 'प्राप्तकर्ता का नाम', 'checkout.addressLine': 'मकान नं., गली, क्षेत्र',
+    'checkout.city': 'शहर / गाँव', 'checkout.state': 'राज्य', 'checkout.pincode': 'पिन कोड', 'checkout.payment': 'भुगतान का तरीका',
+    'checkout.codHint': 'सामान मिलने पर भुगतान करें', 'checkout.upiHint': 'किसी भी UPI ऐप से विक्रेता की UPI ID पर भुगतान करें',
+    'checkout.upiUnavailable': 'UPI उपलब्ध नहीं है क्योंकि आपके कार्ट के किसी विक्रेता ने अभी UPI ID नहीं जोड़ी है।',
+    'checkout.note': 'विक्रेता के लिए संदेश (वैकल्पिक)', 'checkout.notePh': 'जैसे साइज़, रंग, डिलीवरी का सही समय', 'checkout.place': 'ऑर्डर करें',
+    'checkout.safe': 'हम कभी आपका कार्ड, बैंक या UPI PIN नहीं माँगते।', 'checkout.yourOrder': 'आपका ऑर्डर',
+
+    'orders.subtitle': 'अपने ऑर्डर ट्रैक करें और डिलीवरी के बाद समीक्षा दें।', 'orders.active': 'चालू', 'orders.order': 'ऑर्डर',
+    'orders.none': 'अभी कोई ऑर्डर नहीं', 'orders.noneText': 'कुछ खरीदने पर आप उसे यहाँ ट्रैक कर सकते हैं।', 'orders.track': 'ऑर्डर ट्रैक करें',
+    'orders.payNow': 'UPI से भुगतान करें', 'orders.review': 'समीक्षा लिखें', 'orders.placedMany': '{n} ऑर्डर सफलतापूर्वक हुए – हर विक्रेता के लिए एक।',
+
+    'order.title': 'ऑर्डर विवरण', 'order.notFound': 'ऑर्डर नहीं मिला', 'order.placedTitle': 'ऑर्डर सफलतापूर्वक हो गया!',
+    'order.placedText': 'विक्रेता को सूचना भेज दी गई है। हर कदम पर आपको सूचना मिलेगी।', 'order.placedOn': '{date} को ऑर्डर किया',
+    'order.nextStep': 'अगला कदम', 'order.tracking': 'डिलीवरी ट्रैकिंग', 'order.timeline': 'ऑर्डर की प्रगति', 'order.inProgress': 'चल रहा है', 'order.waiting': 'इंतज़ार',
+    'order.stepDone': 'पूरा', 'order.stepCurrent': 'मौजूदा कदम', 'order.stepPending': 'शुरू नहीं हुआ',
+    'order.trackingNote': 'स्थिति विक्रेता द्वारा अपडेट की जाती है। इस प्रोटोटाइप में लाइव GPS ट्रैकिंग नहीं है।',
+    'order.deliveryPartner': 'डिलीवरी पार्टनर', 'order.deliveryPartnerPh': 'जैसे खुद डिलीवरी, इंडिया पोस्ट, स्थानीय कूरियर', 'order.trackingId': 'ट्रैकिंग नंबर',
+    'order.expectedDate': 'डिलीवरी की संभावित तारीख', 'order.items': 'सामान', 'order.payment': 'भुगतान', 'order.itemsTotal': 'सामान का कुल',
+    'order.method': 'तरीका', 'order.paymentStatus': 'भुगतान की स्थिति', 'order.reference': 'ट्रांज़ैक्शन संदर्भ', 'order.paidOn': 'भुगतान तारीख',
+    'order.deliverTo': 'डिलीवरी पता', 'order.customer': 'ग्राहक और डिलीवरी पता', 'order.phone': 'फ़ोन', 'order.customerNote': 'ग्राहक का संदेश',
+    'order.seller': 'विक्रेता', 'order.messageCustomer': 'ग्राहक को संदेश भेजें', 'order.waCustomer': 'नमस्ते {name}, आपके SHG Connect ऑर्डर {order} की स्थिति: {status}।',
+    'order.changeTo': 'ऑर्डर {order} को "{status}" करें?', 'order.note': 'ग्राहक के लिए संदेश', 'order.cancelReason': 'रद्द करने का कारण', 'order.cancelTitle': 'ऑर्डर रद्द करें',
+    'order.action.confirm': 'ऑर्डर की पुष्टि करें', 'order.action.process': 'तैयारी शुरू करें', 'order.action.ready': 'भेजने को तैयार',
+    'order.action.ship': 'भेज दिया', 'order.action.outForDelivery': 'डिलीवरी के लिए निकला', 'order.action.deliver': 'पहुँच गया', 'order.action.cancel': 'ऑर्डर रद्द करें',
+    'order.hint.new': 'ग्राहक ने यह ऑर्डर किया है। स्टॉक देखकर पुष्टि करें।', 'order.hint.confirmed': 'उत्पाद तैयार / पैक करना शुरू करें।',
+    'order.hint.processing': 'पार्सल पैक होने पर "भेजने को तैयार" दबाएँ।', 'order.hint.ready_to_ship': 'कूरियर को दें (या खुद पहुँचाएँ) और "भेज दिया" दबाएँ।',
+    'order.hint.shipped': 'पार्सल ग्राहक के क्षेत्र में पहुँचने पर "डिलीवरी के लिए निकला" दबाएँ।',
+    'order.hint.out_for_delivery': 'ग्राहक को मिलने के बाद "पहुँच गया" दबाएँ। कैश ऑन डिलीवरी अपने आप भुगतान हुआ मान लिया जाएगा।',
+    'order.hint.delivered': 'ऑर्डर पूरा हुआ।', 'order.hint.cancelled': 'यह ऑर्डर रद्द हो गया।',
+
+    'upi.title': 'UPI से भुगतान करें', 'upi.step1': 'QR कोड स्कैन करें या UPI ऐप खोलकर विक्रेता को {amount} भेजें।', 'upi.loading': 'UPI विवरण तैयार हो रहा है…',
+    'upi.payTo': 'किसे भुगतान', 'upi.upiId': 'UPI ID', 'upi.openApp': 'UPI ऐप खोलें', 'upi.openAppHint': 'UPI ऐप वाले फ़ोन पर काम करता है।', 'upi.qrAlt': '{upi} के लिए UPI QR कोड',
+    'upi.refLabel': 'भुगतान के बाद UPI ट्रांज़ैक्शन ID (UTR) लिखें', 'upi.refPh': 'जैसे 412345678901', 'upi.refHint': 'यह आपके UPI ऐप के भुगतान इतिहास में मिलेगा।',
+    'upi.submit': 'मैंने भुगतान कर दिया – विक्रेता को भेजें', 'upi.refError': 'कृपया UPI ऐप में दिखी ट्रांज़ैक्शन ID लिखें (6–30 अक्षर या अंक)',
+    'upi.demoNote': 'डेमो भुगतान: पैसा आपके UPI ऐप से सीधे विक्रेता को जाता है। SHG Connect कभी आपका UPI PIN नहीं माँगता।',
+    'upi.waiting': 'भुगतान जाँच के लिए भेजा गया', 'upi.waitingText': 'संदर्भ {ref} विक्रेता को भेजा गया। उनकी पुष्टि के बाद स्थिति "भुगतान हुआ" हो जाएगी।',
+
+    'dash.hello': 'नमस्ते, {name}!', 'dash.introMsg': 'आपकी दुकान का हाल यहाँ देखें।', 'dash.newOrdersMsg': 'आपके {n} नए ऑर्डर पुष्टि का इंतज़ार कर रहे हैं।',
+    'dash.newOrdersAlert': '{n} नए ऑर्डर!', 'dash.tapToConfirm': 'पुष्टि करने के लिए यहाँ दबाएँ।', 'dash.setupTitle': '4 आसान कदमों में शुरू करें',
+    'dash.setup.profile': 'ग्राहकों को अपने बारे में बताएँ', 'dash.setup.upi': 'भुगतान पाने के लिए UPI ID जोड़ें', 'dash.setup.product': 'अपना पहला उत्पाद जोड़ें',
+    'dash.setup.publish': 'उत्पाद प्रकाशित करें', 'dash.totalProducts': 'कुल उत्पाद', 'dash.activeOrders': 'चालू ऑर्डर', 'dash.completedOrders': 'पूरे ऑर्डर',
+    'dash.totalSales': 'कुल बिक्री', 'dash.viewOrders': 'ऑर्डर देखें', 'dash.promote': 'उत्पादों का प्रचार करें', 'dash.recentOrders': 'हाल के ऑर्डर',
+    'dash.noOrders': 'अभी कोई ऑर्डर नहीं', 'dash.noOrdersText': 'प्रचार करें ताकि ज़्यादा ग्राहक आपके उत्पाद देख सकें।', 'dash.salesSummary': 'बिक्री सारांश',
+    'dash.last7': 'पिछले 7 दिन', 'dash.topProducts': 'सबसे ज़्यादा बिकने वाले', 'dash.views': 'बार देखा', 'dash.sold': 'बिके', 'dash.visibility': 'उत्पाद व्यू और प्रचार',
+    'dash.productViews': 'उत्पादों को कुल कितनी बार देखा गया', 'dash.promotionStatus': 'प्रचार की स्थिति', 'dash.noPromotions': 'अभी कोई प्रचार नहीं चल रहा।', 'dash.help': 'मदद चाहिए?',
+
+    'sp.intro': 'आपके सभी उत्पाद। ड्राफ्ट और मंज़ूरी के इंतज़ार वाले उत्पाद केवल आपको दिखते हैं।', 'sp.live': 'लाइव', 'sp.search': 'मेरे उत्पाद खोजें',
+    'sp.none': 'अभी कोई उत्पाद नहीं', 'sp.noneText': 'अपना पहला उत्पाद जोड़ें और ग्राहकों तक पहुँचना शुरू करें।', 'sp.noMatch': 'कोई उत्पाद मेल नहीं खाता',
+    'sp.stock': 'स्टॉक', 'sp.rejected': 'मंज़ूर नहीं', 'sp.pendingNote': 'एडमिन की मंज़ूरी का इंतज़ार।', 'sp.promote': 'प्रचार', 'sp.preview': 'देखें',
+    'sp.confirmDelete': '"{name}" हटाएँ? यह वापस नहीं होगा।', 'sp.deleted': 'उत्पाद हटा दिया गया',
+
+    'ap.step1': '1. फ़ोटो और नाम', 'ap.step2': '2. कीमत और स्टॉक', 'ap.step3': '3. विवरण और डिलीवरी',
+    'ap.s1Title': 'फ़ोटो और आसान नाम जोड़ें', 'ap.s2Title': 'कीमत और स्टॉक तय करें', 'ap.s3Title': 'विवरण लिखें और डिलीवरी चुनें',
+    'ap.photos': 'उत्पाद की फ़ोटो', 'ap.addPhotos': 'फ़ोटो जोड़ने के लिए दबाएँ', 'ap.photoRules': 'JPG, PNG या WebP · हर फ़ोटो 5 MB तक · अधिकतम 5 फ़ोटो',
+    'ap.photoCount': '{max} में से {n} फ़ोटो', 'ap.photoN': 'फ़ोटो {n}', 'ap.cover': 'मुख्य', 'ap.removePhoto': 'फ़ोटो {n} हटाएँ',
+    'ap.name': 'उत्पाद का नाम', 'ap.namePh': 'जैसे हाथ से बनी बाँस की टोकरी', 'ap.tipName': 'उत्पाद का नाम आसान रखें', 'ap.chooseCategory': 'श्रेणी चुनें',
+    'ap.price': 'बिक्री कीमत (₹)', 'ap.tipPrice': 'असली बिक्री कीमत लिखें', 'ap.quantity': 'उपलब्ध मात्रा', 'ap.qtyHint': 'अभी कितने नग बेच सकते हैं?',
+    'ap.discount': 'छूट % (वैकल्पिक)', 'ap.pricePreview': 'ग्राहक को दिखेगा: {final}', 'ap.pricePreviewDiscount': 'ग्राहक को दिखेगा: {final} (पहले {price}, {d}% छूट)',
+    'ap.descPh': 'साइज़, सामग्री, रंग, कैसे बना है, देखभाल…', 'ap.tipDesc': 'साइज़/सामग्री ज़रूर लिखें', 'ap.delivery': 'डिलीवरी उपलब्धता',
+    'ap.charge': 'डिलीवरी शुल्क (₹)', 'ap.tags': 'टैग (वैकल्पिक)', 'ap.tagsPh': 'बाँस, उपहार, पर्यावरण-अनुकूल', 'ap.tagsHint': 'कॉमा से अलग करें। ग्राहकों को खोजने में मदद मिलती है।',
+    'ap.saveDraft': 'ड्राफ्ट सेव करें', 'ap.publish': 'उत्पाद प्रकाशित करें', 'ap.tipsTitle': 'ज़्यादा बेचने के सुझाव',
+    'ap.tip1': 'दिन की रोशनी में साफ़ फ़ोटो लें। पहली फ़ोटो मुख्य फ़ोटो होगी।', 'ap.tip2': 'उत्पाद का नाम आसान रखें।', 'ap.tip3': 'साइज़/सामग्री ज़रूर लिखें।',
+    'ap.tip4': 'असली बिक्री कीमत लिखें।', 'ap.tip5': 'समय कम है? ड्राफ्ट सेव करें और बाद में पूरा करें।',
+    'ap.editTitle': 'उत्पाद बदलें', 'ap.currentStatus': 'मौजूदा स्थिति', 'ap.notYours': 'आप केवल अपने उत्पाद बदल सकते हैं।',
+    'ap.badType': '"{name}" JPG, PNG या WebP फ़ोटो नहीं है।', 'ap.tooBig': '"{name}" {mb} MB से बड़ी है।', 'ap.tooMany': 'आप अधिकतम {max} फ़ोटो जोड़ सकते हैं।',
+    'ap.val.photo': 'कृपया कम से कम एक साफ़ फ़ोटो जोड़ें।', 'ap.val.name': 'कृपया उत्पाद का नाम लिखें', 'ap.val.nameLong': 'नाम बहुत लंबा है (अधिकतम 100)',
+    'ap.val.category': 'कृपया श्रेणी चुनें', 'ap.val.price': 'कृपया कीमत लिखें', 'ap.val.priceMin': 'कीमत कम से कम ₹1 हो', 'ap.val.priceMax': 'कीमत बहुत ज़्यादा लग रही है',
+    'ap.val.qty': 'कृपया मात्रा लिखें', 'ap.val.qtyNeg': 'मात्रा 0 या उससे ज़्यादा (पूरी संख्या) हो', 'ap.val.discount': 'छूट 0 से 90% के बीच हो',
+    'ap.val.charge': 'डिलीवरी शुल्क ऋणात्मक नहीं हो सकता', 'ap.val.desc': 'विवरण बहुत लंबा है (अधिकतम 2000)',
+    'ap.draftSaved': 'ड्राफ्ट सेव हुआ', 'ap.published': 'उत्पाद प्रकाशित हुआ!', 'ap.updated': 'उत्पाद अपडेट हुआ', 'ap.promoteNow': 'अभी प्रचार करें',
+    'ap.viewLive': 'उत्पाद देखें', 'ap.addAnother': 'एक और उत्पाद जोड़ें',
+
+    'so.intro': 'नए ऑर्डर यहाँ दिखते हैं। हर ऑर्डर को अगले कदम पर ले जाने के लिए हरा बटन दबाएँ।', 'so.search': 'ऑर्डर नंबर खोजें (जैसे SC1001)',
+    'so.none': 'यहाँ कोई ऑर्डर नहीं', 'so.noneText': 'नए ऑर्डर यहाँ दिखेंगे। प्रचार से ज़्यादा ऑर्डर मिलते हैं।',
+    'so.col.order': 'ऑर्डर ID', 'so.col.customer': 'ग्राहक', 'so.col.product': 'उत्पाद', 'so.col.qty': 'मात्रा', 'so.col.amount': 'राशि',
+    'so.col.payment': 'भुगतान', 'so.col.status': 'ऑर्डर स्थिति', 'so.col.date': 'तारीख', 'so.col.action': 'कार्य',
+    'del.intro': 'डिलीवरी की स्थिति अपडेट करें ताकि ग्राहक जान सकें उनका ऑर्डर कहाँ है। यह आपके द्वारा डाली गई स्थिति है – लाइव GPS ट्रैकिंग नहीं है।',
+    'del.count': '{n} ऑर्डर पहुँचाने हैं', 'del.none': 'अभी कुछ पहुँचाना नहीं है', 'del.noneText': 'पुष्टि हुए लेकिन न पहुँचे ऑर्डर यहाँ दिखेंगे।',
+
+    'sales.range': 'तारीख की सीमा', 'sales.today': 'आज', 'sales.week': 'इस हफ़्ते', 'sales.month': 'इस महीने', 'sales.year': 'पिछले 12 महीने',
+    'sales.custom': 'अपनी तारीख चुनें', 'sales.from': 'से', 'sales.to': 'तक', 'sales.applyRange': 'दिखाएँ', 'sales.showing': '{from} – {to} दिखा रहे हैं',
+    'sales.totalSales': 'कुल बिक्री', 'sales.revenue': 'मिली हुई राशि', 'sales.cancelled': 'रद्द ऑर्डर',
+    'sales.explain': '{orders} ऑर्डर · औसत ऑर्डर {avg} · {items} सामान बिके (शीर्ष उत्पाद)', 'sales.overTime': 'समय के साथ बिक्री',
+    'sales.byStatus': 'स्थिति के अनुसार ऑर्डर', 'sales.mostSold': 'सबसे ज़्यादा बिके उत्पाद', 'sales.orders': 'इस अवधि के ऑर्डर',
+    'sales.none': 'इस अवधि में कोई बिक्री नहीं', 'sales.noneText': 'लंबी तारीख सीमा चुनें।', 'sales.ordersN': '{n} ऑर्डर',
+    'sales.chooseDates': 'कृपया दोनों तारीखें चुनें।', 'sales.dateOrder': 'शुरुआती तारीख आख़िरी तारीख से पहले हो।',
+    'chart.noData': 'इस अवधि का अभी कोई डेटा नहीं', 'chart.showTable': 'तालिका में दिखाएँ', 'chart.period': 'अवधि',
+
+    'promo.intro': 'इस प्रोटोटाइप में प्रचार मुफ़्त है। प्रचारित उत्पाद बाज़ार में "प्रचारित उत्पाद" में, फ़ीचर्ड उत्पाद होम पेज पर दिखते हैं, और छूट पर कीमत का टैग दिखता है।',
+    'promo.yours': 'आपके प्रचार', 'promo.new': 'उत्पाद का प्रचार करें', 'promo.product': 'उत्पाद', 'promo.chooseProduct': 'लाइव उत्पाद चुनें',
+    'promo.type': 'प्रचार का प्रकार', 'promo.type.promoted': 'प्रचार', 'promo.type.featured': 'फ़ीचर', 'promo.type.discount': 'छूट',
+    'promo.promotedHint': 'बाज़ार में "प्रचारित उत्पाद" में दिखाएँ', 'promo.featuredHint': 'होम पेज पर "फ़ीचर्ड उत्पाद" में दिखाएँ',
+    'promo.discountHint': 'कुछ दिनों की छूट दें', 'promo.discountPercent': 'छूट %', 'promo.duration': 'अवधि',
+    'promo.d3': '3 दिन', 'promo.d7': '7 दिन', 'promo.d15': '15 दिन', 'promo.d30': '30 दिन', 'promo.start': 'प्रचार शुरू करें',
+    'promo.none': 'अभी कोई प्रचार नहीं', 'promo.noneText': 'ज़्यादा ग्राहकों को दिखाने के लिए किसी उत्पाद का प्रचार करें।',
+    'promo.noLive': 'कोई लाइव उत्पाद नहीं', 'promo.noLiveText': 'पहले उत्पाद प्रकाशित करें, फिर यहाँ प्रचार करें।',
+    'promo.views': 'व्यू', 'promo.clicks': 'क्लिक', 'promo.orders': 'ऑर्डर', 'promo.daysLeft': '{n} दिन बाकी', 'promo.activeDays': 'चालू · {n} दिन बाकी',
+    'promo.extend': '7 दिन बढ़ाएँ', 'promo.stop': 'रोकें', 'promo.confirmStop': 'यह प्रचार अभी रोकें?', 'promo.val.product': 'कृपया उत्पाद चुनें',
+    'promo.val.type': 'कृपया प्रकार चुनें', 'promo.val.duration': 'कृपया अवधि चुनें', 'promo.val.discount': 'छूट 5% से 90% के बीच हो',
+
+    'pay.noUpi': 'अपनी UPI ID जोड़ें ताकि ग्राहक ऑनलाइन भुगतान कर सकें।', 'pay.addUpi': 'UPI ID जोड़ें', 'pay.received': 'मिला हुआ भुगतान',
+    'pay.pendingAmount': 'बाकी (कैश ऑन डिलीवरी सहित)',
+    'pay.howItWorks': 'UPI भुगतान सीधे आपकी UPI ID पर आता है। जब ग्राहक ट्रांज़ैक्शन संदर्भ (UTR) भेजे, अपना UPI ऐप जाँचें और "भुगतान हुआ" दबाएँ। कैश ऑन डिलीवरी ऑर्डर डिलीवरी पर अपने आप "भुगतान हुआ" हो जाते हैं।',
+    'pay.none': 'इस फ़िल्टर में कोई ऑर्डर नहीं', 'pay.markPaid': 'भुगतान हुआ', 'pay.notReceived': 'नहीं मिला', 'pay.markRefunded': 'वापस किया',
+    'pay.verifyHint': '"भुगतान हुआ" दबाने से पहले UPI ऐप में संदर्भ जाँच लें।',
+    'pay.confirm.paid': 'क्या आपको ऑर्डर {order} के लिए {amount} मिल गए?', 'pay.confirm.failed': '{order} का भुगतान "नहीं मिला" करें? ग्राहक को सूचना जाएगी।',
+    'pay.confirm.refunded': 'क्या आपने ऑर्डर {order} के {amount} वापस कर दिए?', 'pay.confirm.pending': '{order} का भुगतान फिर से "बाकी" करें?',
+
+    'profile.welcomeTitle': 'SHG Connect में आपका स्वागत है!', 'profile.welcomeText': 'कदम 1: ग्राहकों को अपने बारे में बताएँ और UPI ID जोड़ें। फिर पहला उत्पाद जोड़ें।',
+    'profile.personal': 'व्यक्तिगत जानकारी', 'profile.photo': 'प्रोफ़ाइल फ़ोटो', 'profile.photoHint': 'JPG, PNG या WebP, 2 MB तक',
+    'profile.business': 'व्यवसाय / SHG की जानकारी', 'profile.viewPublic': 'सार्वजनिक प्रोफ़ाइल देखें', 'profile.sellerType': 'विक्रेता का प्रकार',
+    'profile.businessName': 'व्यवसाय / SHG का नाम', 'profile.description': 'आपके / आपके समूह के बारे में',
+    'profile.descriptionPh': 'आप क्या बनाते हैं? कब से? क्या ख़ास है?', 'profile.descriptionHint': 'ग्राहक उन विक्रेताओं पर भरोसा करते हैं जो अपनी कहानी बताते हैं।',
+    'profile.categories': 'उत्पाद श्रेणियाँ', 'profile.paymentDelivery': 'भुगतान और डिलीवरी', 'profile.upi': 'UPI ID',
+    'profile.upiHint': 'ग्राहक सीधे इस UPI ID पर भुगतान करते हैं। यह केवल उनके ऑर्डर के भुगतान पेज पर दिखती है। अपना UPI PIN कभी न बताएँ।',
+    'profile.deliveryOptions': 'आप कौन सी डिलीवरी देते हैं', 'profile.saved': 'प्रोफ़ाइल सेव हुई', 'profile.nextStep': 'बहुत बढ़िया! अगला कदम: पहला उत्पाद जोड़ें।',
+    'settings.language': 'भाषा', 'settings.chooseLanguage': 'अपनी भाषा चुनें', 'settings.whatsapp': 'WhatsApp संपर्क',
+    'settings.waLabel': 'मेरे उत्पादों पर "WhatsApp पर चैट करें" बटन दिखाएँ', 'settings.waHint': 'ग्राहक आपके रजिस्टर्ड मोबाइल नंबर पर WhatsApp संदेश भेज सकेंगे।',
+    'settings.waOn': 'WhatsApp बटन अब ग्राहकों को दिखेगा', 'settings.waOff': 'WhatsApp बटन छिपा दिया गया',
+    'settings.password': 'पासवर्ड बदलें', 'settings.current': 'मौजूदा पासवर्ड', 'settings.new': 'नया पासवर्ड', 'settings.updatePassword': 'पासवर्ड अपडेट करें',
+
+    'notif.title': 'सूचनाएँ', 'notif.markAll': 'सभी को पढ़ा हुआ करें', 'notif.viewAll': 'सभी सूचनाएँ देखें', 'notif.empty': 'कोई सूचना नहीं',
+    'notif.emptyText': 'ऑर्डर, भुगतान और समीक्षा की सूचनाएँ यहाँ मिलेंगी।', 'notif.unreadOnly': 'केवल नई', 'notif.aria': 'सूचनाएँ, {n} नई',
+
+    'admin.title': 'एडमिन डैशबोर्ड', 'admin.nav.overview': 'सारांश', 'admin.nav.users': 'उपयोगकर्ता और विक्रेता', 'admin.nav.products': 'उत्पाद लिस्टिंग',
+    'admin.nav.orders': 'ऑर्डर', 'admin.nav.reviews': 'समीक्षा नियंत्रण', 'admin.nav.categories': 'श्रेणियाँ', 'admin.nav.reports': 'रिपोर्ट',
+    'admin.totalSellers': 'कुल विक्रेता', 'admin.totalCustomers': 'कुल ग्राहक', 'admin.totalProducts': 'कुल उत्पाद', 'admin.totalOrders': 'कुल ऑर्डर',
+    'admin.completedOrders': 'पूरे ऑर्डर', 'admin.gmv': 'कुल बिक्री मूल्य', 'admin.pendingProducts': 'मंज़ूरी के लिए उत्पाद', 'admin.flaggedReviews': 'रिपोर्ट की गई समीक्षाएँ',
+    'admin.waitingApproval': 'मंज़ूरी का इंतज़ार', 'admin.noPending': 'कोई उत्पाद मंज़ूरी का इंतज़ार नहीं कर रहा।', 'admin.reportedReviews': 'रिपोर्ट की गई समीक्षाएँ',
+    'admin.noFlagged': 'कोई रिपोर्ट नहीं।', 'admin.approve': 'मंज़ूर करें', 'admin.reject': 'अस्वीकार करें', 'admin.feature': 'फ़ीचर करें', 'admin.unfeature': 'फ़ीचर हटाएँ',
+    'admin.featureArtisan': 'कारीगर फ़ीचर करें', 'admin.viewProfile': 'प्रोफ़ाइल', 'admin.suspend': 'निलंबित करें', 'admin.activate': 'सक्रिय करें',
+    'admin.confirmSuspend': 'यह खाता निलंबित करें? उपयोगकर्ता लॉगिन नहीं कर पाएगा और उसके उत्पाद छिप जाएँगे।',
+    'admin.searchUsers': 'नाम, ईमेल, फ़ोन खोजें', 'admin.searchProducts': 'उत्पाद खोजें', 'admin.role': 'भूमिका', 'admin.allRoles': 'सभी भूमिकाएँ',
+    'admin.sellers': 'सभी विक्रेता', 'admin.status': 'स्थिति', 'admin.allStatus': 'सभी स्थितियाँ', 'admin.col.name': 'नाम', 'admin.col.contact': 'संपर्क',
+    'admin.col.location': 'स्थान', 'admin.col.joined': 'जुड़े', 'admin.col.actions': 'कार्य', 'admin.col.price': 'कीमत', 'admin.nothing': 'दिखाने के लिए कुछ नहीं',
+    'admin.manage': 'प्रबंधन', 'admin.rejectTitle': 'उत्पाद अस्वीकार करें', 'admin.rejectReason': 'कारण (विक्रेता को दिखेगा)', 'admin.rejectPh': 'जैसे फ़ोटो साफ़ नहीं है',
+    'admin.reportedFor': 'रिपोर्ट का कारण', 'admin.keepReview': 'रखें', 'admin.hideReview': 'छिपाएँ', 'admin.addCategory': 'श्रेणी जोड़ें', 'admin.editCategory': 'श्रेणी बदलें',
+    'admin.catName': 'नाम (अंग्रेज़ी)', 'admin.catNameHi': 'नाम (हिंदी)', 'admin.catIcon': 'आइकन', 'admin.catIconHint': 'Lucide आइकन नाम, जैसे gem, shirt, package',
+    'admin.hide': 'छिपाएँ', 'admin.show': 'दिखाएँ', 'admin.confirmDeleteCat': 'यह श्रेणी हटाएँ?', 'admin.val.catName': 'कृपया श्रेणी का नाम लिखें',
+    'admin.monthlySales': 'मासिक बिक्री (पिछले 6 महीने)', 'admin.salesByCategory': 'श्रेणी के अनुसार बिक्री', 'admin.topSellers': 'शीर्ष विक्रेता',
+    'admin.usersByRole': 'भूमिका के अनुसार उपयोगकर्ता', 'admin.paymentsReport': 'भुगतान', 'admin.count': 'संख्या',
+
+    'notif.new_order.title': 'नया ऑर्डर मिला', 'notif.new_order.msg': 'ऑर्डर {orderNumber} – {amount}। कृपया पुष्टि करें।',
+    'notif.payment_received.title': 'UPI भुगतान मिला – कृपया जाँचें', 'notif.payment_received.msg': 'ऑर्डर {orderNumber}: {amount}। संदर्भ: {reference}।',
+    'notif.order_cancelled.title': 'ऑर्डर रद्द', 'notif.order_cancelled.msg': 'ऑर्डर {orderNumber} रद्द हो गया।',
+    'notif.new_review.title': 'नई समीक्षा', 'notif.new_review.msg': '{customer} ने "{productName}" को {rating}★ दिए।',
+    'notif.delivery_update.title': 'डिलीवरी स्थिति अपडेट', 'notif.delivery_update.msg': 'ऑर्डर {orderNumber}: {status}।',
+    'notif.order_confirmed.title': 'ऑर्डर की पुष्टि हुई', 'notif.order_confirmed.msg': 'आपका ऑर्डर {orderNumber} अब: {status}।',
+    'notif.order_shipped.title': 'ऑर्डर भेज दिया गया', 'notif.order_shipped.msg': 'आपका ऑर्डर {orderNumber} अब: {status}।',
+    'notif.out_for_delivery.title': 'डिलीवरी के लिए निकला', 'notif.out_for_delivery.msg': 'आपका ऑर्डर {orderNumber} अब: {status}।',
+    'notif.delivered.title': 'ऑर्डर पहुँच गया', 'notif.delivered.msg': 'आपका ऑर्डर {orderNumber} अब: {status}।',
+    'notif.product_status.title': 'उत्पाद अपडेट', 'notif.product_status.msg': '"{productName}": {status}।'
+  };
+
+  const DICT = { en, hi };
+  const KEY = 'shg_lang';
+  let lang = 'en';
+  try { lang = localStorage.getItem(KEY) === 'hi' ? 'hi' : 'en'; } catch (e) { /* storage blocked */ }
+
+  function t(key, vars) {
+    let s = DICT[lang][key] ?? en[key] ?? key;
+    if (vars) s = s.replace(/\{(\w+)\}/g, (m, k) => (vars[k] !== undefined && vars[k] !== null ? vars[k] : ''));
+    return s;
+  }
+
+  function apply(root = document) {
+    document.documentElement.lang = lang;
+    root.querySelectorAll('[data-i18n]').forEach((el) => {
+      const k = el.dataset.i18n;
+      if (k in en) el.textContent = t(k);
+    });
+    // Only for trusted, static strings from this file
+    root.querySelectorAll('[data-i18n-html]').forEach((el) => {
+      const k = el.dataset.i18nHtml;
+      if (k in en) el.innerHTML = t(k);
+    });
+    [['placeholder', 'i18nPlaceholder'], ['aria-label', 'i18nAriaLabel'], ['title', 'i18nTitle']].forEach(([attr, ds]) => {
+      root.querySelectorAll(`[data-${attr === 'aria-label' ? 'i18n-aria-label' : 'i18n-' + attr}]`).forEach((el) => {
+        const k = el.dataset[ds];
+        if (k in en) el.setAttribute(attr, t(k));
+      });
+    });
+  }
+
+  window.t = t;
+  window.I18N = {
+    get lang() { return lang; },
+    has: (key) => key in DICT[lang] || key in en,
+    set(next) {
+      try { localStorage.setItem(KEY, next); } catch (e) { /* ignore */ }
+      location.reload(); // simplest way to re-render every page in the new language
+    },
+    apply,
+    dict: DICT
+  };
+})();

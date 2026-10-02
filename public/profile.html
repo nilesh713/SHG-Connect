@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/profile.js" defer></script>
+</head>
+<body data-layout="auto" data-require="any" data-title="nav.profile">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="container" style="max-width:820px;padding-top:16px">
+  <div class="alert alert-info" id="welcome-alert" hidden><i data-lucide="hand-heart" aria-hidden="true"></i><div><strong data-i18n="profile.welcomeTitle">Welcome to SHG Connect!</strong><p data-i18n="profile.welcomeText">Step 1: tell customers about you and add your UPI ID. Then add your first product.</p></div></div>
+  <form id="profile-form" class="stack">
+    <section class="card" aria-labelledby="pp-h">
+      <h2 id="pp-h" style="font-size:1.15rem"><i data-lucide="user-round" aria-hidden="true"></i> <span data-i18n="profile.personal">Personal details</span></h2>
+      <div class="row" style="margin-bottom:16px">
+        <span class="avatar avatar-lg" id="avatar-preview"></span>
+        <div class="form-group" style="margin:0"><label for="profileImage" data-i18n="profile.photo">Profile photo</label>
+          <input class="input" id="profileImage" type="file" accept="image/jpeg,image/png,image/webp">
+          <span class="hint" data-i18n="profile.photoHint">JPG, PNG or WebP, up to 2 MB</span><p class="field-error" id="photo-error"></p></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="pf-name" class="required" data-i18n="auth.fullName">Full name</label><input class="input" id="pf-name" name="name" maxlength="60" autocomplete="name"></div>
+        <div class="form-group"><label for="pf-phone" class="required" data-i18n="auth.mobile">Mobile number</label><input class="input" id="pf-phone" name="phone" type="tel" maxlength="10" inputmode="numeric"></div>
+        <div class="form-group"><label for="pf-email" class="required" data-i18n="auth.email">Email</label><input class="input" id="pf-email" name="email" type="email" autocomplete="email"></div>
+        <div class="form-group"><label for="pf-location" data-i18n="auth.location">Location (village / town, state)</label><input class="input" id="pf-location" name="location" maxlength="100"></div>
+      </div>
+    </section>
+    <div id="seller-fields" class="stack" hidden>
+      <section class="card" aria-labelledby="bp-h">
+        <div class="row-between"><h2 id="bp-h" style="font-size:1.15rem;margin:0"><i data-lucide="store" aria-hidden="true"></i> <span data-i18n="profile.business">Business / SHG details</span></h2>
+          <a class="btn btn-ghost btn-sm" id="public-link" href="#"><i data-lucide="external-link" aria-hidden="true"></i><span data-i18n="profile.viewPublic">View public profile</span></a></div>
+        <p class="small muted" style="margin-top:6px"><span data-i18n="profile.sellerType">Seller type</span>: <strong id="seller-type"></strong></p>
+        <div class="form-group"><label for="pf-biz" data-i18n="profile.businessName">Business / SHG name</label><input class="input" id="pf-biz" name="businessName" maxlength="100"></div>
+        <div class="form-group"><label for="pf-desc" data-i18n="profile.description">About you / your group</label>
+          <textarea class="input" id="pf-desc" name="description" maxlength="1000" data-i18n-placeholder="profile.descriptionPh" placeholder="What do you make? Since when? What makes it special?"></textarea>
+          <span class="hint"><i data-lucide="lightbulb" aria-hidden="true"></i><span data-i18n="profile.descriptionHint">Customers trust sellers who share their story.</span></span></div>
+        <fieldset class="form-group" style="border:0;padding:0"><legend class="label" data-i18n="profile.categories">Product categories</legend><div class="choice-grid" id="cat-checks"></div></fieldset>
+      </section>
+      <section class="card" aria-labelledby="pay-h" id="upi">
+        <h2 id="pay-h" style="font-size:1.15rem"><i data-lucide="indian-rupee" aria-hidden="true"></i> <span data-i18n="profile.paymentDelivery">Payment & delivery</span></h2>
+        <div class="form-group"><label for="pf-upi" data-i18n="profile.upi">UPI ID</label>
+          <input class="input" id="pf-upi" name="upiId" autocomplete="off" placeholder="yourname@upi">
+          <span class="hint"><i data-lucide="shield-check" aria-hidden="true"></i><span data-i18n="profile.upiHint">Customers pay directly to this UPI ID. It is shown only on their order payment screen. Never share your UPI PIN.</span></span></div>
+        <fieldset class="form-group" style="border:0;padding:0"><legend class="label" data-i18n="profile.deliveryOptions">Delivery options you offer</legend>
+          <div class="choice-grid">
+            <label class="check"><input type="checkbox" name="deliveryOptions" value="pickup"><span data-i18n="delivery.pickup">Pickup only</span></label>
+            <label class="check"><input type="checkbox" name="deliveryOptions" value="local"><span data-i18n="delivery.local">Local delivery</span></label>
+            <label class="check"><input type="checkbox" name="deliveryOptions" value="state"><span data-i18n="delivery.state">Within state</span></label>
+            <label class="check"><input type="checkbox" name="deliveryOptions" value="nationwide"><span data-i18n="delivery.nationwide">All India</span></label>
+          </div></fieldset>
+      </section>
+    </div>
+    <button class="btn btn-primary btn-lg" type="submit"><i data-lucide="save" aria-hidden="true"></i><span data-i18n="common.saveChanges">Save changes</span></button>
+  </form>
+</div>
+</main>
+</body>
+</html>

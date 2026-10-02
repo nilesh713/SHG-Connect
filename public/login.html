@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body data-layout="public">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="auth-wrap"><div class="auth-card">
+  <div class="card">
+    <div class="auth-head"><span class="logo-mark"><i data-lucide="sprout" aria-hidden="true"></i></span><h1 style="font-size:1.6rem" data-i18n="auth.loginTitle">Welcome back</h1>
+      <p class="muted" data-i18n="auth.loginSub">Login with your email or mobile number.</p></div>
+    <form id="login-form">
+      <div class="form-group"><label for="identifier" class="required" data-i18n="auth.identifier">Email or mobile number</label>
+        <div class="input-icon"><i data-lucide="user-round" aria-hidden="true"></i><input class="input" id="identifier" name="identifier" autocomplete="username" inputmode="email"></div></div>
+      <div class="form-group"><label for="password" class="required" data-i18n="auth.password">Password</label>
+        <div class="password-wrap"><input class="input" id="password" name="password" type="password" autocomplete="current-password">
+          <button type="button" class="icon-btn toggle-pass" data-target="password" aria-label="Show password" data-i18n-aria-label="auth.showPassword"><i data-lucide="eye" aria-hidden="true"></i></button></div></div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit"><i data-lucide="log-in" aria-hidden="true"></i><span data-i18n="nav.login">Login</span></button>
+    </form>
+    <p class="text-center" style="margin-top:16px"><span data-i18n="auth.noAccount">New to SHG Connect?</span> <a href="/register.html" data-i18n="auth.createAccount">Create an account</a></p>
+    <div class="demo-box">
+      <strong><i data-lucide="flask-conical" aria-hidden="true"></i> <span data-i18n="auth.demoTitle">Demo accounts (college project)</span></strong>
+      <p class="small muted" style="margin:4px 0 0" data-i18n="auth.demoText">Tap a role to fill in the login form. See README for details.</p>
+      <div class="row">
+        <button type="button" class="btn btn-secondary btn-sm" data-demo="priya@demo.shgconnect.in"><span data-i18n="role.customer">Customer</span></button>
+        <button type="button" class="btn btn-secondary btn-sm" data-demo="lakshmi@demo.shgconnect.in"><span data-i18n="role.artisan">Artisan</span></button>
+        <button type="button" class="btn btn-secondary btn-sm" data-demo="sunita@demo.shgconnect.in"><span data-i18n="role.shg_leader">SHG Leader</span></button>
+        <button type="button" class="btn btn-secondary btn-sm" data-demo="admin@demo.shgconnect.in"><span data-i18n="role.admin">Admin</span></button>
+      </div>
+    </div>
+  </div>
+</div></div>
+</main>
+</body>
+</html>

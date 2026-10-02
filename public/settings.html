@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/settings.js" defer></script>
+</head>
+<body data-layout="auto" data-require="any" data-title="nav.settings">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="container stack" style="max-width:720px;padding-top:16px">
+  <section class="card" aria-labelledby="lang-h">
+    <h2 id="lang-h" style="font-size:1.15rem"><i data-lucide="languages" aria-hidden="true"></i> <span data-i18n="settings.language">Language</span></h2>
+    <div class="form-group"><label for="lang-select" data-i18n="settings.chooseLanguage">Choose your language</label>
+      <select class="input" id="lang-select"><option value="en">English</option><option value="hi" lang="hi">हिंदी (Hindi)</option></select></div>
+  </section>
+  <section class="card" id="wa-settings" hidden aria-labelledby="wa-h">
+    <h2 id="wa-h" style="font-size:1.15rem"><i data-lucide="message-circle" aria-hidden="true"></i> <span data-i18n="settings.whatsapp">WhatsApp contact</span></h2>
+    <label class="check"><input type="checkbox" id="wa-toggle"><span data-i18n="settings.waLabel">Show "Chat on WhatsApp" button on my products</span></label>
+    <p class="small muted" data-i18n="settings.waHint">Customers will be able to message your registered mobile number on WhatsApp.</p>
+  </section>
+  <section class="card" aria-labelledby="pw-h">
+    <h2 id="pw-h" style="font-size:1.15rem"><i data-lucide="key-round" aria-hidden="true"></i> <span data-i18n="settings.password">Change password</span></h2>
+    <form id="password-form">
+      <div class="form-group"><label for="cur" class="required" data-i18n="settings.current">Current password</label><input class="input" id="cur" name="currentPassword" type="password" autocomplete="current-password"></div>
+      <div class="form-row">
+        <div class="form-group"><label for="np" class="required" data-i18n="settings.new">New password</label><input class="input" id="np" name="newPassword" type="password" autocomplete="new-password"></div>
+        <div class="form-group"><label for="cp" class="required" data-i18n="auth.confirmPassword">Confirm password</label><input class="input" id="cp" name="confirmPassword" type="password" autocomplete="new-password"></div>
+      </div>
+      <button class="btn btn-primary" type="submit"><span data-i18n="settings.updatePassword">Update password</span></button>
+    </form>
+  </section>
+  <section class="card"><button class="btn btn-danger" type="button" id="logout-btn"><i data-lucide="log-out" aria-hidden="true"></i><span data-i18n="nav.logout">Logout</span></button></section>
+</div>
+</main>
+</body>
+</html>

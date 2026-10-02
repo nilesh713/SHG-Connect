@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Product – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/add-product.js" defer></script>
+</head>
+<body data-layout="dashboard" data-require="seller" data-title="nav.addProduct">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div id="ap-root" class="dash-grid sidebar-right">
+  <div class="card">
+    <h2 id="ap-heading" class="sr-only" data-i18n="nav.addProduct">Add Product</h2>
+    <p id="status-note" class="small"></p>
+    <ol class="stepper" aria-label="Steps">
+      <li><span data-i18n="ap.step1">1. Photos & name</span></li><li><span data-i18n="ap.step2">2. Price & stock</span></li><li><span data-i18n="ap.step3">3. Details & delivery</span></li>
+    </ol>
+    <form id="product-form">
+      <!-- Step 1 -->
+      <div class="form-step">
+        <h2 style="font-size:1.2rem" data-i18n="ap.s1Title">Add photos and a simple name</h2>
+        <div class="form-group">
+          <span class="label required" id="photos-label" data-i18n="ap.photos">Product photos</span>
+          <label class="dropzone" id="dropzone" tabindex="0" aria-labelledby="photos-label" aria-describedby="photo-count">
+            <i data-lucide="camera" aria-hidden="true"></i><strong data-i18n="ap.addPhotos">Tap to add photos</strong>
+            <span class="small muted" data-i18n="ap.photoRules">JPG, PNG or WebP · up to 5 MB each · max 5 photos</span>
+            <input type="file" id="images" accept="image/jpeg,image/png,image/webp" multiple>
+          </label>
+          <span class="small muted" id="photo-count"></span>
+          <p class="field-error" id="images-error" role="alert"></p>
+          <div class="image-previews" id="previews"></div>
+        </div>
+        <div class="form-group"><label for="ap-name" class="required" data-i18n="ap.name">Product name</label>
+          <input class="input" id="ap-name" name="name" maxlength="100" data-i18n-placeholder="ap.namePh" placeholder="e.g. Handmade Bamboo Basket">
+          <span class="hint"><i data-lucide="lightbulb" aria-hidden="true"></i><span data-i18n="ap.tipName">Keep the product name simple</span></span></div>
+        <div class="form-group"><label for="ap-category" class="required" data-i18n="market.category">Category</label><select class="input" id="ap-category" name="category"></select></div>
+      </div>
+      <!-- Step 2 -->
+      <div class="form-step">
+        <h2 style="font-size:1.2rem" data-i18n="ap.s2Title">Set your price and stock</h2>
+        <div class="form-row">
+          <div class="form-group"><label for="ap-price" class="required" data-i18n="ap.price">Selling price (₹)</label>
+            <input class="input" id="ap-price" name="price" type="number" min="1" step="1" inputmode="numeric">
+            <span class="hint"><i data-lucide="lightbulb" aria-hidden="true"></i><span data-i18n="ap.tipPrice">Enter the actual selling price</span></span></div>
+          <div class="form-group"><label for="ap-qty" class="required" data-i18n="ap.quantity">Quantity available</label>
+            <input class="input" id="ap-qty" name="quantity" type="number" min="0" step="1" inputmode="numeric">
+            <span class="hint" data-i18n="ap.qtyHint">How many pieces can you sell now?</span></div>
+        </div>
+        <div class="form-group"><label for="ap-discount" data-i18n="ap.discount">Discount % (optional)</label>
+          <input class="input" id="ap-discount" name="discountPercent" type="number" min="0" max="90" step="1" inputmode="numeric" placeholder="0"></div>
+        <p class="price-preview" id="price-preview" hidden aria-live="polite"></p>
+      </div>
+      <!-- Step 3 -->
+      <div class="form-step">
+        <h2 style="font-size:1.2rem" data-i18n="ap.s3Title">Describe it and choose delivery</h2>
+        <div class="form-group"><label for="ap-desc" data-i18n="product.description">Description</label>
+          <textarea class="input" id="ap-desc" name="description" maxlength="2000" data-i18n-placeholder="ap.descPh" placeholder="Size, material, colour, how it is made, care instructions…"></textarea>
+          <span class="hint"><i data-lucide="lightbulb" aria-hidden="true"></i><span data-i18n="ap.tipDesc">Mention size/material</span></span></div>
+        <div class="form-row">
+          <div class="form-group"><label for="ap-delivery" data-i18n="ap.delivery">Delivery availability</label>
+            <select class="input" id="ap-delivery" name="deliveryOption">
+              <option value="pickup" data-i18n="delivery.pickup">Pickup only</option>
+              <option value="local" data-i18n="delivery.local" selected>Local delivery</option>
+              <option value="state" data-i18n="delivery.state">Within state</option>
+              <option value="nationwide" data-i18n="delivery.nationwide">All India</option>
+            </select></div>
+          <div class="form-group" id="charge-group"><label for="ap-charge" data-i18n="ap.charge">Delivery charge (₹)</label>
+            <input class="input" id="ap-charge" name="deliveryCharge" type="number" min="0" step="1" inputmode="numeric" placeholder="0"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="ap-location" data-i18n="product.location">Location</label><input class="input" id="ap-location" name="location" maxlength="100"></div>
+          <div class="form-group"><label for="ap-tags" data-i18n="ap.tags">Tags (optional)</label>
+            <input class="input" id="ap-tags" name="tags" data-i18n-placeholder="ap.tagsPh" placeholder="bamboo, gift, eco-friendly">
+            <span class="hint" data-i18n="ap.tagsHint">Separate with commas. Helps customers find you.</span></div>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn btn-ghost" type="button" id="prev-btn"><i data-lucide="arrow-left" aria-hidden="true"></i><span data-i18n="common.back">Back</span></button>
+        <div class="right">
+          <button class="btn btn-secondary" type="button" id="draft-btn"><i data-lucide="save" aria-hidden="true"></i><span data-i18n="ap.saveDraft">Save Draft</span></button>
+          <button class="btn btn-primary" type="button" id="next-btn"><span data-i18n="common.next">Next</span><i data-lucide="arrow-right" aria-hidden="true"></i></button>
+          <button class="btn btn-primary" type="submit" id="publish-btn"><i data-lucide="send" aria-hidden="true"></i><span data-i18n="ap.publish">Publish Product</span></button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <aside class="card tips-card" aria-labelledby="tips-h">
+    <h2 id="tips-h" style="font-size:1.05rem"><i data-lucide="lightbulb" aria-hidden="true"></i> <span data-i18n="ap.tipsTitle">Tips to sell more</span></h2>
+    <ul>
+      <li><i data-lucide="camera" aria-hidden="true"></i><span data-i18n="ap.tip1">Add clear photos in daylight. The first photo is the cover.</span></li>
+      <li><i data-lucide="type" aria-hidden="true"></i><span data-i18n="ap.tip2">Keep the product name simple.</span></li>
+      <li><i data-lucide="ruler" aria-hidden="true"></i><span data-i18n="ap.tip3">Mention size/material.</span></li>
+      <li><i data-lucide="indian-rupee" aria-hidden="true"></i><span data-i18n="ap.tip4">Enter the actual selling price.</span></li>
+      <li><i data-lucide="save" aria-hidden="true"></i><span data-i18n="ap.tip5">Short on time? Save a draft and finish later.</span></li>
+    </ul>
+  </aside>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+<rect width="600" height="600" fill="#F6E3EA"/>
+<g fill="rgba(255,255,255,.35)"><circle cx="70" cy="80" r="6"/><circle cx="530" cy="110" r="5"/><circle cx="520" cy="470" r="7"/><circle cx="90" cy="430" r="5"/><circle cx="300" cy="60" r="4"/></g>
+<ellipse cx="300" cy="505" rx="200" ry="24" fill="rgba(0,0,0,.10)"/>
+<ellipse cx="220" cy="330" rx="95" ry="95" fill="none" stroke="#C0392B" stroke-width="22"/><ellipse cx="300" cy="300" rx="95" ry="95" fill="none" stroke="#D4A017" stroke-width="22"/><ellipse cx="380" cy="330" rx="95" ry="95" fill="none" stroke="#2F6B4F" stroke-width="22"/><ellipse cx="300" cy="380" rx="95" ry="95" fill="none" stroke="#8E44AD" stroke-width="22"/>
+<circle cx="395" cy="300" r="5" fill="#FFF3C4"/><circle cx="376.85661446562" cy="355.8395989677849" r="5" fill="#FFF3C4"/><circle cx="329.35661446562" cy="390.35036904803957" r="5" fill="#FFF3C4"/><circle cx="270.64338553438" cy="390.3503690480396" r="5" fill="#FFF3C4"/><circle cx="223.14338553438" cy="355.839598967785" r="5" fill="#FFF3C4"/><circle cx="205" cy="300" r="5" fill="#FFF3C4"/><circle cx="223.14338553438" cy="244.16040103221508" r="5" fill="#FFF3C4"/><circle cx="270.64338553438" cy="209.64963095196043" r="5" fill="#FFF3C4"/><circle cx="329.35661446562" cy="209.6496309519604" r="5" fill="#FFF3C4"/><circle cx="376.85661446562" cy="244.16040103221502" r="5" fill="#FFF3C4"/>
+</svg>

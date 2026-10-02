@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payments – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/payments.js" defer></script>
+</head>
+<body data-layout="dashboard" data-require="seller" data-title="nav.payments">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="alert alert-warning" id="upi-missing" hidden><i data-lucide="triangle-alert" aria-hidden="true"></i><p><span data-i18n="pay.noUpi">Add your UPI ID so customers can pay you online.</span> <a href="/profile.html#upi" data-i18n="pay.addUpi">Add UPI ID</a></p></div>
+<div class="stat-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+  <div class="stat"><span class="stat-icon"><i data-lucide="wallet" aria-hidden="true"></i></span><span class="stat-value" id="pay-received">–</span><span class="stat-label" data-i18n="pay.received">Payment received</span></div>
+  <div class="stat"><span class="stat-icon earth"><i data-lucide="hourglass" aria-hidden="true"></i></span><span class="stat-value" id="pay-pending">–</span><span class="stat-label" data-i18n="pay.pendingAmount">Pending (incl. COD to collect)</span></div>
+</div>
+<div class="alert alert-info"><i data-lucide="shield-check" aria-hidden="true"></i><p data-i18n="pay.howItWorks">UPI payments go directly to your UPI ID. When a customer sends a transaction reference (UTR), check your UPI app and press "Mark as paid". Cash on Delivery orders are marked paid automatically when delivered.</p></div>
+<div class="toolbar"><label for="pay-filter" class="label small" data-i18n="order.paymentStatus">Payment status</label>
+  <select class="input" id="pay-filter"><option value="" data-i18n="market.all">All</option><option value="pending" data-i18n="status.pending">Pending</option><option value="paid" data-i18n="status.paid">Paid</option><option value="failed" data-i18n="status.failed">Failed</option><option value="refunded" data-i18n="status.refunded">Refunded</option></select></div>
+<div class="table-wrap"><table class="table stack">
+  <thead><tr><th data-i18n="so.col.order">Order ID</th><th data-i18n="so.col.amount">Amount</th><th data-i18n="order.method">Method</th><th data-i18n="order.paymentStatus">Payment status</th><th data-i18n="order.reference">Transaction reference</th><th data-i18n="so.col.status">Order status</th><th data-i18n="so.col.action">Action</th></tr></thead>
+  <tbody id="pay-body"></tbody>
+</table></div>
+<nav class="pagination" id="pagination"></nav>
+</main>
+</body>
+</html>

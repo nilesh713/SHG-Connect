@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout – SHG Connect</title>
+  <meta name="description" content="SHG Connect – a marketplace for Self Help Groups, artisans and small-scale producers.">
+  <meta name="theme-color" content="#1f3d2b">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/js/translations.js" defer></script>
+  <script src="/js/components.js" defer></script>
+  <script src="/js/api.js" defer></script>
+  <script src="/js/auth.js" defer></script>
+  <script src="/js/cart.js" defer></script>
+  <script src="/js/products.js" defer></script>
+  <script src="/js/orders.js" defer></script>
+  <script src="/js/notifications.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+  <script src="/js/app.js" defer></script>
+  <script src="/js/pages/checkout.js" defer></script>
+</head>
+<body data-layout="public" data-require="customer">
+<div class="server-warning" role="alert" style="padding:16px;margin:12px;border:2px solid #b3261e;background:#fbe7e5;font-family:sans-serif;font-size:18px">
+  <strong>SHG Connect must be opened through its Node.js server.</strong><br>
+  Do not open the HTML files directly or with Live Server. In the <code>shg-connect</code> folder run <code>npm start</code>, then open <a href="http://localhost:5000">http://localhost:5000</a>.
+</div>
+<main id="main">
+<div class="container" id="checkout-root">
+  
+  <div class="page-head">
+    <h1 data-i18n="checkout.title">Checkout</h1>
+    
+  </div>
+  <ol class="checkout-steps"><li class="done"><span data-i18n="checkout.step1">Cart</span></li><li class="current" aria-current="step"><span data-i18n="checkout.step2">Address & payment</span></li><li><span data-i18n="checkout.step3">Order placed</span></li></ol>
+  <div class="cart-layout">
+    <form id="checkout-form" class="stack">
+      <section class="card" aria-labelledby="addr-h">
+        <h2 id="addr-h" style="font-size:1.15rem"><i data-lucide="map-pin" aria-hidden="true"></i> <span data-i18n="checkout.address">Delivery address</span></h2>
+        <div class="form-row">
+          <div class="form-group"><label for="fullName" class="required" data-i18n="checkout.receiver">Receiver name</label><input class="input" id="fullName" name="fullName" autocomplete="name" maxlength="60"></div>
+          <div class="form-group"><label for="phone" class="required" data-i18n="auth.mobile">Mobile number</label><input class="input" id="phone" name="phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national"></div>
+        </div>
+        <div class="form-group"><label for="addressLine" class="required" data-i18n="checkout.addressLine">House no., street, area</label><input class="input" id="addressLine" name="addressLine" autocomplete="street-address" maxlength="200"></div>
+        <div class="form-row three">
+          <div class="form-group"><label for="city" class="required" data-i18n="checkout.city">City / village</label><input class="input" id="city" name="city" autocomplete="address-level2"></div>
+          <div class="form-group"><label for="state" class="required" data-i18n="checkout.state">State</label><input class="input" id="state" name="state" autocomplete="address-level1"></div>
+          <div class="form-group"><label for="pincode" class="required" data-i18n="checkout.pincode">PIN code</label><input class="input" id="pincode" name="pincode" inputmode="numeric" maxlength="6" autocomplete="postal-code"></div>
+        </div>
+      </section>
+      <section class="card" aria-labelledby="pay-h">
+        <h2 id="pay-h" style="font-size:1.15rem"><i data-lucide="wallet" aria-hidden="true"></i> <span data-i18n="checkout.payment">Payment method</span></h2>
+        <fieldset class="form-group" style="border:0;padding:0;margin:0">
+          <legend class="sr-only" data-i18n="checkout.payment">Payment method</legend>
+          <div class="choice-grid">
+            <div class="choice"><input type="radio" id="pm-cod" name="paymentMethod" value="cod" checked><label for="pm-cod"><i data-lucide="banknote" aria-hidden="true"></i><span data-i18n="payment.cod">Cash on Delivery</span><small data-i18n="checkout.codHint">Pay when you receive the product</small></label></div>
+            <div class="choice"><input type="radio" id="pm-upi" name="paymentMethod" value="upi"><label for="pm-upi"><i data-lucide="smartphone" aria-hidden="true"></i><span data-i18n="payment.upi">UPI</span><small data-i18n="checkout.upiHint">Pay to the seller's UPI ID using any UPI app</small></label></div>
+          </div>
+        </fieldset>
+        <p class="small muted" id="upi-note" hidden style="margin-top:10px"><i data-lucide="info" aria-hidden="true"></i> <span data-i18n="checkout.upiUnavailable">UPI is not available because a seller in your cart has not added a UPI ID yet.</span></p>
+        <div class="form-group" style="margin-top:16px"><label for="customerNote" data-i18n="checkout.note">Note for the seller (optional)</label>
+          <input class="input" id="customerNote" name="customerNote" maxlength="300" data-i18n-placeholder="checkout.notePh" placeholder="e.g. size, colour, best time to deliver"></div>
+      </section>
+      <button class="btn btn-primary btn-lg btn-block" type="submit"><i data-lucide="circle-check" aria-hidden="true"></i><span data-i18n="checkout.place">Place order</span></button>
+      <p class="small muted text-center" data-i18n="checkout.safe">We never ask for your card, bank or UPI PIN.</p>
+    </form>
+    <aside class="card summary-card" id="checkout-summary"></aside>
+  </div>
+</div>
+</main>
+</body>
+</html>
